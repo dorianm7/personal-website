@@ -33,6 +33,25 @@
     </header> 
     <main>
         <h1>Canvas Experiment</h1>
+        <canvas id="canvas" width="500" height="500">      
+        </canvas>
+        <script>
+            let canvasEl = document.getElementById("canvas");
+            let canvasContext = canvasEl.getContext("2d");
+            canvasContext.moveTo(0,0);
+            canvasContext.lineTo(500, 500);
+            
+            canvasContext.moveTo(500,0);
+            canvasContext.lineTo(0, 500);
+
+            canvasContext.moveTo(0,250);
+            canvasContext.lineTo(500, 250);
+
+            canvasContext.moveTo(250,0);
+            canvasContext.lineTo(250, 500);
+
+            canvasContext.stroke();
+        </script>
     </main>
     <footer>
 
