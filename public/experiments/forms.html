@@ -33,6 +33,63 @@
     </header> 
     <main>
         <h1>Forms Experiment</h1>
+        <form action="http://httpbin.org/post" method="post" target="_blank">
+            <label for="fname">First Name:</label>
+            <input type="text" id="fname" name="fname" required>
+
+            <label for="lname">Last Name:</label>
+            <input type="text" id="lname" name="lname" required>
+
+            <label for="identity">Identity:</label>
+            <select id="identity" name="identity">
+                <option value="recruiter">Recruiter</option>
+                <option value="friend">Friend</option>
+                <option value="foe">Foe</option>
+            </select>
+
+            <fieldset>
+                <legend>Favorite book type</legend>
+
+                <label for="sci-fi">Sci-Fi</label>
+                <input type="radio" id="sci-fi" name="fav-book-type" value=sci-fi>
+
+                <label for="self-help">Self help</label>
+                <input type="radio" id="self-help" name="fav-book-type" value="self-help">
+
+                <label for="biography">Biography</label>
+                <input type="radio" id="biography" name="fav-book-type" value="biography">
+            </fieldset>
+
+
+            <label for="geographic-region">Geographic Region:</label>
+            <input list="us-region-list" id="geographic-region" name="geographic-region">
+            <datalist id="us-region-list">
+                <option value="Pacific">
+                <option value="Rocky Mountains">
+                <option value="Southwest">
+                <option value="Midwest">
+                <option value="Southeast">
+                <option value="Northeast">
+                <option value="Noncontiguous">
+            </datalist>
+
+            <label for="car">Favorite Car:</label>
+            <select id="car">
+                <optgroup label="Toyota">
+                    <option>86</option>
+                    <option>Supra</option>
+                </optgroup>
+                <optgroup label="Nissan">
+                    <option>370Z</option>
+                    <option>GTR</option>
+                </optgroup>
+            </select>
+
+            <label for="feedback">Feedback</label>
+            <textarea id="feedback" name="feedback"></textarea>
+
+            <button type="submit">Submit</button>
+        </form>
     </main>
     <footer>
 
