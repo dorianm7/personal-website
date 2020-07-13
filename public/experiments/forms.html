@@ -33,6 +33,10 @@
     </header> 
     <main>
         <h1>Forms Experiment</h1>
+        <figure>
+            <img src="../images/default_200.jpg" alt="Your picture">
+            <figcaption>Your photo</figcaption>
+        </figure>
         <form action="http://httpbin.org/post" method="post" target="_blank">
             <label for="fname">First Name:</label>
             <input type="text" id="fname" name="fname" required>
@@ -85,11 +89,45 @@
                 </optgroup>
             </select>
 
+            <table>
+                <caption>Table Colgroup Example</caption>
+                <colgroup>
+                    <col span="1">
+                    <col span="2">
+                </colgroup>
+                <tr>
+                    <td><i>C1R1</i></td>
+                    <td><i>C2R1</i></td>
+                    <td><i>C3R1</i></td>
+                </tr>
+            </table>
+
+            <label for="colgroup-response">Favorite table value?</label>
+            <input type="text" id="colgroup-response" name="colgroup-response">
+
+            <p><b>My grocery list</b></p>
+            <ol>
+                <li>Milk</li>
+                <li>Eggs</li>
+            </ol>
+
+            <label for="list-response">Does my grocery list look fine?</label>
+            <input type="text" id="list-response" name="list-response">
             <label for="feedback">Feedback</label>
             <textarea id="feedback" name="feedback"></textarea>
 
+            <details>
+                <summary>Captcha</summary>
+                d95m94
+            </details>
+
+            <label for="captcha-response">Please enter the text found in the captcha</label>
+            <input type="text" id="captcha-response" name="captcha-response">
+
             <button type="submit">Submit</button>
         </form>
+
+        <code>window.alert('Thanks for filling out the form!');</code>
     </main>
     <footer>
 
