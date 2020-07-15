@@ -1,1 +1,35 @@
-/* place holder file for now */
+.menu {
+    list-style-type: none;
+}
+
+.menu-item {
+    padding: 5px;
+}
+
+.menu-item:hover {
+    background-color: brown;
+}
+
+.dropdown .menu-item {
+    /* visibility: hidden; */
+}
+
+    .dropdown .menu-item:hover {
+        background-color: blue;
+    }
+
+#navbar {
+    background-color: aqua;
+    display: flex;
+    justify-content: space-between;
+}
+
+#name-home-link {
+    background-color: bisque;
+    
+}
+
+#nav-menu {
+    background-color: aquamarine;
+    display: flex;
+}
