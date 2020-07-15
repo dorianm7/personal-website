@@ -33,3 +33,17 @@
     background-color: aquamarine;
     display: flex;
 }
+
+#hero-container {
+    background-color: blanchedalmond;
+    display: flex;
+    flex-direction: row;
+}
+
+#hero-info {
+    background-color: aqua;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
