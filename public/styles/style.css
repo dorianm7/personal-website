@@ -8,11 +8,12 @@ main {
 }
 
 .menu-item {
-    padding: 5px;
+    /* margin: 5px; */
 }
 
 .menu-item:hover {
     background-color: brown;
+    /* margin: 5px; */
 }
 
 .dropdown {
@@ -31,11 +32,17 @@ main {
 
 }
     .dropdown:hover .menu {
-        display: inline;
+        /* display: inline; */
+        position: absolute;
+        margin: 0;
+        padding: 0px;
+        background-color: bisque;
     }
 
     .dropdown:hover .menu-item{
         display: block;
+        text-align: left;
+        padding: 5px;
     }
 
 #navbar {
