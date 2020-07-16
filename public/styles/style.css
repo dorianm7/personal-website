@@ -15,27 +15,43 @@ main {
     background-color: brown;
 }
 
-.dropdown .menu-item {
-    /* visibility: hidden; */
+.dropdown {
+
 }
+    
+    .dropdown .menu-item {
+        display: none;
+    }
 
     .dropdown .menu-item:hover {
-        background-color: blue;
+        background-color: coral;
+    }
+    
+.dropdown:hover {
+
+}
+    .dropdown:hover .menu {
+        display: inline;
+    }
+
+    .dropdown:hover .menu-item{
+        display: block;
     }
 
 #navbar {
     background-color: aqua;
     display: flex;
-    justify-content: space-between;
+    padding: 10px 10px;
 }
 
 #name-home-link {
     background-color: bisque;
-    
 }
 
 #nav-menu {
     background-color: aquamarine;
+    margin: 0 0 0 auto;
+    padding: 0;
     display: flex;
 }
 
