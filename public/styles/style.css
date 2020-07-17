@@ -7,42 +7,47 @@ main {
     list-style-type: none;
 }
 
-.menu-item {
-    /* margin: 5px; */
+.menu-item > a {
+    padding: 5px 5px;
 }
 
-.menu-item:hover {
+#nav-menu > .menu-item > a:hover,
+#nav-menu > .menu-item:hover > a {
     background-color: brown;
-    /* margin: 5px; */
+}
+
+#nav-menu > .menu-item > a {
+    background-color: blanchedalmond;
 }
 
 .dropdown {
 
 }
-    
-    .dropdown .menu-item {
-        display: none;
+    .dropdown .menu {
+        margin-top: 5px;
+        padding: 0;
+        margin-left: 0;
+        position: absolute;
     }
 
-    .dropdown .menu-item:hover {
+    .dropdown .menu-item {
+        display: none;
+        margin: 5px 0;
+    }
+
+    .dropdown a:hover {
         background-color: coral;
     }
-    
+
 .dropdown:hover {
 
 }
     .dropdown:hover .menu {
-        /* display: inline; */
-        position: absolute;
-        margin: 0;
-        padding: 0px;
         background-color: bisque;
     }
 
     .dropdown:hover .menu-item{
         display: block;
-        text-align: left;
-        padding: 5px;
     }
 
 #navbar {
