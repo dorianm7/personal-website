@@ -11,14 +11,6 @@ main {
     padding: 5px 5px;
 }
 
-#nav-menu > .menu-item > a:hover,
-#nav-menu > .menu-item:hover > a {
-    background-color: brown;
-}
-
-#nav-menu > .menu-item > a {
-    background-color: blanchedalmond;
-}
 
 .dropdown {
 
@@ -54,6 +46,20 @@ main {
     background-color: aqua;
     display: flex;
     padding: 10px 10px;
+}
+
+#navbar a{
+    text-decoration: none;
+    color: black;
+}
+
+#nav-menu > .menu-item > a:hover,
+#nav-menu > .menu-item:hover > a {
+    background-color: brown;
+}
+
+#nav-menu > .menu-item > a {
+    background-color: blanchedalmond;
 }
 
 #name-home-link {
