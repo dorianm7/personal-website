@@ -100,6 +100,10 @@ main {
         height: 3em;
     }
 
+    #hero-info a {
+        color: black;
+    }
+
 #hero-social-contact-container {
     margin: 3% 0;
 }
