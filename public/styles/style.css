@@ -61,7 +61,7 @@ section > p
     justify-content: space-evenly;
 }
 
-.previewcard {
+.preview-card {
     width: 25%;
     text-align: center;
 }
@@ -116,15 +116,26 @@ section > p
         margin: 0 0;
     }
 
-    #hero-info .icon {
-        width: 3em;
-        height: 3em;
-    }
-
     #hero-info a {
         color: black;
     }
 
+.icon {
+    width: 3em;
+    height: 3em;
+}
+
 #hero-social-contact-container {
     margin: 3% 0;
+}
+
+#contact-card {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#contact-info a {
+    color: black;
 }
