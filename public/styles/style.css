@@ -108,6 +108,8 @@ footer {
 .preview-card {
     width: 30%;
     text-align: center;
+    padding: 10px;
+    border: .5vw solid var(--header-color);
 }
 
 .full-card {
