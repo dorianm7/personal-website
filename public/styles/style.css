@@ -9,6 +9,30 @@
     --navbar-submenu-margin-top: calc(var(--navbar-menu-item-padding) - 1px);
     --dropdown-menu-color: bisque;
     --dropdown-menu-hover-color: coral;
+    font-family: 'PT Sans Narrow', sans-serif;
+}
+
+h1 { 
+    font-size: 60px;
+}
+
+h2 {
+    font-size: 50px;
+}
+
+h3 {
+    font-size: 40px;
+}
+
+h1, h2, h3 {
+    transform: rotate(-4deg);
+}
+p {
+font-size: 25px;
+}
+
+#name-home-link, h1, h2, -h3 {
+    font-family: 'Caveat', cursive;
 }
 
 main {
