@@ -1,8 +1,9 @@
-/* *:hover {
+*:hover {
     border: 1px solid black;
-} */
+}
 
 :root {
+    --header-color: yellow;
     --navbar-color: yellow; 
     --navbar-menu-item-hover-color: grey;
     --navbar-menu-item-padding: 5px;
@@ -11,6 +12,10 @@
     --dropdown-menu-hover-color: coral;
     font-family: 'PT Sans Narrow', sans-serif;
     font-size: 20px;
+}
+
+header {
+    background-color: var(--header-color);
 }
 
 h1 { 
@@ -27,13 +32,10 @@ h3 {
 
 h1, h2, h3 {
     transform: rotate(-4deg);
+    display: inline-block;
 }
 p {
     font-size: 25px;
-}
-
-h1 {
-    display: inline-block;
 }
 
 #name-home-link, h1, h2, -h3 {
@@ -149,6 +151,7 @@ footer {
 #hero-container {
     display: flex;
     flex-direction: row;
+    margin-right: 10%;
 }
 
 #hero-info {
