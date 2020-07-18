@@ -19,11 +19,11 @@
     --accent-color-darker: hsl(var(--accent-color-hue), var(--accent-color-saturation), calc(var(--accent-color-lightness) - 20%));
     --header-color: var(--accent-color);
     --navbar-color: var(--accent-color); 
-    --navbar-menu-item-hover-color: var(--accent-color-lighter); 
+    --navbar-menu-item-hover-color: var(--accent-color-dark); 
     --navbar-menu-item-padding: 5px;
     --navbar-submenu-margin-top: calc(var(--navbar-menu-item-padding) - 1px);
     --dropdown-menu-color: var(--navbar-menu-item-hover-color);
-    --dropdown-menu-hover-color: var(--accent-color-light); 
+    --dropdown-menu-hover-color: var(--accent-color-darker); 
     font-family: 'PT Sans Narrow', sans-serif;
     font-size: 20px;
 }
