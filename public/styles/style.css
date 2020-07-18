@@ -10,6 +10,7 @@
     --dropdown-menu-color: bisque;
     --dropdown-menu-hover-color: coral;
     font-family: 'PT Sans Narrow', sans-serif;
+    font-size: 20px;
 }
 
 h1 { 
@@ -28,7 +29,11 @@ h1, h2, h3 {
     transform: rotate(-4deg);
 }
 p {
-font-size: 25px;
+    font-size: 25px;
+}
+
+h1 {
+    display: inline-block;
 }
 
 #name-home-link, h1, h2, -h3 {
@@ -99,8 +104,14 @@ footer {
 }
 
 .preview-card {
-    width: 25%;
+    width: 30%;
     text-align: center;
+}
+
+.full-card {
+    width: 80%;
+    text-align: center;
+    margin: 0 auto;
 }
 
 #navbar {
