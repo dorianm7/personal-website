@@ -3,16 +3,27 @@
 } */
 
 :root {
-    --header-color-hue: 50;
-    --header-color-saturation: 100%;
-    --header-color-lightness: 50%;
-    --header-color: hsl(var(--header-color-hue), var(--header-color-saturation), var(--header-color-lightness));
-    --navbar-color: var(--header-color); 
-    --navbar-menu-item-hover-color: hsl(var(--header-color-hue), var(--header-color-saturation), calc(var(--header-color-lightness) + 20%));
+    --main-color-hue: 0;
+    --main-color-saturation: 100%;
+    --main-color-lightness: 0%;
+    --main-color: hsl(var(--main-color-hue), var(--main-color-saturation), var(--main-color-lightness));
+    /* --accent-color-hue: 150; */
+    --accent-color-hue: 160;
+    /* --accent-color-hue: 280; */
+    --accent-color-saturation: 100%;
+    --accent-color-lightness: 50%;
+    --accent-color: hsl(var(--accent-color-hue), var(--accent-color-saturation), var(--accent-color-lightness));
+    --accent-color-light: hsl(var(--accent-color-hue), var(--accent-color-saturation), calc(var(--accent-color-lightness) + 10%));
+    --accent-color-lighter: hsl(var(--accent-color-hue), var(--accent-color-saturation), calc(var(--accent-color-lightness) + 20%));
+    --accent-color-dark: hsl(var(--accent-color-hue), var(--accent-color-saturation), calc(var(--accent-color-lightness) - 10%));
+    --accent-color-darker: hsl(var(--accent-color-hue), var(--accent-color-saturation), calc(var(--accent-color-lightness) - 20%));
+    --header-color: var(--accent-color);
+    --navbar-color: var(--accent-color); 
+    --navbar-menu-item-hover-color: var(--accent-color-lighter); 
     --navbar-menu-item-padding: 5px;
     --navbar-submenu-margin-top: calc(var(--navbar-menu-item-padding) - 1px);
     --dropdown-menu-color: var(--navbar-menu-item-hover-color);
-    --dropdown-menu-hover-color: hsl(var(--header-color-hue), var(--header-color-saturation), calc(var(--header-color-lightness) + 10%));;
+    --dropdown-menu-hover-color: var(--accent-color-light); 
     font-family: 'PT Sans Narrow', sans-serif;
     font-size: 20px;
 }
@@ -36,6 +47,7 @@ h3 {
 
 h1, h2, h3 {
     transform: rotate(-4deg);
+    color: var(--accent-color-darker);
 }
 p {
     font-size: 25px;
@@ -119,6 +131,15 @@ footer {
     width: 80%;
     text-align: center;
     margin: 0 auto;
+}
+
+.button-like {
+    border-radius: 5px;
+    padding: .3em;
+    text-decoration: none;
+    color: white;
+    background-color: var(--accent-color-dark);
+    box-shadow: -3px 3px 5px -3px black;
 }
 
 #navbar {
