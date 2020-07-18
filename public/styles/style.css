@@ -1,3 +1,7 @@
+*:hover {
+    border: 1px solid black;
+}
+
 main {
     width: 90%;
     margin: 0px auto 0px auto;
@@ -10,7 +14,6 @@ main {
 .menu-item > a {
     padding: 5px 5px;
 }
-
 
 .dropdown {
 
@@ -80,9 +83,18 @@ main {
 }
 
 #hero-info {
+    text-align: center;
     background-color: aqua;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    margin: auto 10%;
 }
 
+    #hero-info > p {
+        padding: 1em 0;
+        border: 1px solid black;
+        background-color: rgba(240, 248, 255, .9);
+        margin: 0 0;
+    }
+
+#hero-social-contact-container {
+    margin: 3% 0;
+}
