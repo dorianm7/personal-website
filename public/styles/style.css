@@ -1,6 +1,6 @@
-*:hover {
+/* *:hover {
     border: 1px solid black;
-}
+} */
 
 :root {
     --header-color: yellow;
@@ -20,6 +20,7 @@ header {
 
 h1 { 
     font-size: 60px;
+    display: inline-block;
 }
 
 h2 {
@@ -32,7 +33,6 @@ h3 {
 
 h1, h2, h3 {
     transform: rotate(-4deg);
-    display: inline-block;
 }
 p {
     font-size: 25px;
