@@ -95,6 +95,11 @@ main {
         margin: 0 0;
     }
 
+    #hero-info .icon {
+        width: 3em;
+        height: 3em;
+    }
+
 #hero-social-contact-container {
     margin: 3% 0;
 }
