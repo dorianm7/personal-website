@@ -24,12 +24,20 @@
     --navbar-submenu-margin-top: calc(var(--navbar-menu-item-padding) - 1px);
     --dropdown-menu-color: var(--navbar-menu-item-hover-color);
     --dropdown-menu-hover-color: var(--accent-color-darker); 
+}
+
+body {
     font-family: 'PT Sans Narrow', sans-serif;
     font-size: 20px;
 }
 
 header {
     background-color: var(--header-color);
+}
+
+a {
+    text-decoration: none;
+    color: var(--main-color);
 }
 
 h1 { 
@@ -150,11 +158,6 @@ footer {
     padding: .5em;
 }
 
-    #navbar a{
-        text-decoration: none;
-        color: black;
-    }
-
 #nav-menu {
     margin: 0 0 0 auto;
     padding: 0;
@@ -194,10 +197,6 @@ footer {
         margin: 0 0;
     }
 
-    #hero-info a {
-        color: black;
-    }
-
 .icon {
     width: 3em;
     height: 3em;
@@ -212,8 +211,4 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-#contact-info a {
-    color: black;
 }
