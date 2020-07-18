@@ -4,7 +4,7 @@
 
 :root {
     --header-color: yellow;
-    --navbar-color: yellow; 
+    --navbar-color: var(--header-color); 
     --navbar-menu-item-hover-color: grey;
     --navbar-menu-item-padding: 5px;
     --navbar-submenu-margin-top: calc(var(--navbar-menu-item-padding) - 1px);
