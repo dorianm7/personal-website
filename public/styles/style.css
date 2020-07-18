@@ -3,13 +3,16 @@
 } */
 
 :root {
-    --header-color: yellow;
+    --header-color-hue: 50;
+    --header-color-saturation: 100%;
+    --header-color-lightness: 50%;
+    --header-color: hsl(var(--header-color-hue), var(--header-color-saturation), var(--header-color-lightness));
     --navbar-color: var(--header-color); 
-    --navbar-menu-item-hover-color: grey;
+    --navbar-menu-item-hover-color: hsl(var(--header-color-hue), var(--header-color-saturation), calc(var(--header-color-lightness) + 20%));
     --navbar-menu-item-padding: 5px;
     --navbar-submenu-margin-top: calc(var(--navbar-menu-item-padding) - 1px);
-    --dropdown-menu-color: bisque;
-    --dropdown-menu-hover-color: coral;
+    --dropdown-menu-color: var(--navbar-menu-item-hover-color);
+    --dropdown-menu-hover-color: hsl(var(--header-color-hue), var(--header-color-saturation), calc(var(--header-color-lightness) + 10%));;
     font-family: 'PT Sans Narrow', sans-serif;
     font-size: 20px;
 }
