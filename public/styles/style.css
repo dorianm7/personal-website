@@ -7,6 +7,17 @@ main {
     margin: 0px auto 0px auto;
 }
 
+section {
+    margin: 1%;
+}
+
+section > p
+{
+    margin: 0 auto;
+    text-align: center;
+    width: 80%;
+}
+
 .menu {
     list-style-type: none;
 }
@@ -44,6 +55,16 @@ main {
     .dropdown:hover .menu-item{
         display: block;
     }
+
+.cardholder {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.previewcard {
+    width: 25%;
+    text-align: center;
+}
 
 #navbar {
     background-color: aqua;
