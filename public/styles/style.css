@@ -1,6 +1,6 @@
-*:hover {
+/* *:hover {
     border: 1px solid black;
-}
+} */
 
 main {
     width: 90%;
@@ -11,11 +11,15 @@ section {
     margin: 1%;
 }
 
-section > p
-{
-    margin: 0 auto;
+    section > p
+    {
+        margin: 0 auto;
+        text-align: center;
+        width: 80%;
+    }
+
+footer {
     text-align: center;
-    width: 80%;
 }
 
 .menu {
@@ -67,45 +71,42 @@ section > p
 }
 
 #navbar {
-    background-color: aqua;
+    /* background-color: aqua; */
     display: flex;
     padding: 10px 10px;
 }
 
-#navbar a{
-    text-decoration: none;
-    color: black;
-}
-
-#nav-menu > .menu-item > a:hover,
-#nav-menu > .menu-item:hover > a {
-    background-color: brown;
-}
-
-#nav-menu > .menu-item > a {
-    background-color: blanchedalmond;
-}
-
-#name-home-link {
-    background-color: bisque;
-}
+    #navbar a{
+        text-decoration: none;
+        color: black;
+    }
 
 #nav-menu {
-    background-color: aquamarine;
     margin: 0 0 0 auto;
     padding: 0;
     display: flex;
 }
 
+    #nav-menu > .menu-item > a:hover,
+    #nav-menu > .menu-item:hover > a {
+        /* background-color: brown; */
+    }
+
+    #nav-menu > .menu-item > a {
+        /* background-color: blanchedalmond; */
+    }
+
+#name-home-link {
+    /* background-color: bisque; */
+}
+
 #hero-container {
-    background-color: blanchedalmond;
     display: flex;
     flex-direction: row;
 }
 
 #hero-info {
     text-align: center;
-    background-color: aqua;
     margin: auto 10%;
 }
 
