@@ -31,6 +31,12 @@
     --main-web-h2-size: calc(var(--main-web-font-size) + 35px);
     --main-web-h1-size: calc(var(--main-web-font-size) + 45px);
     --small-web-nav-font-size: calc(var(--main-web-font-size) * .95);
+    --phone-mobile-font-size: 35px;
+    --phone-mobile-nav-font-size: calc(var(--phone-mobile-font-size) + 5px);
+    --phone-mobile-h4-size: calc(var(--phone-mobile-font-size) + 15px);
+    --phone-mobile-h3-size: calc(var(--phone-mobile-font-size) + 25px);
+    --phone-mobile-h2-size: calc(var(--phone-mobile-font-size) + 35px);
+    --phone-mobile-h1-size: calc(var(--phone-mobile-font-size) + 45px);
 
 }
 
@@ -39,22 +45,18 @@
     visibility: hidden;
 }
 
-/* smaller screen size */
+/* smaller screen size laptop, mobile */
 /* verticalize */
-@media (max-width: 1000px) {
+@media (max-width: 1000px) and (hover: hover), (hover: none) {
     main {
         text-align: center;
     }
 
-    .cardholder {
+    .card-holder {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
-    }
-
-    .cardholder .preview-card {
-        width: 60%;
     }
 
     #hero-container {
@@ -76,39 +78,56 @@
         margin: 0 auto;
     }        
 
+    #contact-card > img {
+        display: none;
+        visibility: hidden;
+    }
+
+    .card-holder {
+        display: flex; 
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* smaller laptop size, smaller nav font*/
+@media (max-width: 1000px) and (hover:hover) {
     #navbar > #name-home-link,
     #nav-menu {
         font-size: var(--small-web-nav-font-size);
     }
 
-    #contact-card > img {
-        display: none;
-        visibility: hidden;
-    }
-}
-
-/* phone */
-@media (max-width: 500px) and 
-        (hover: none) and (pointer: coarse) {
-    #about {
-        background-color: blue;
-    }
-}
-
-/* tablet */
-@media (min-width: 501px) and (max-width: 1000px) and 
-        (hover: none) and (pointer: coarse) {
-    #about {
-        background-color: brown;
+    .card-holder .preview-card {
+        width: 60%;
     }
 }
 
 /* touchscreen device */
-@media (hover: none) and (pointer: coarse){
-    #bio {
-        background-color: blue;
+@media (hover: none){
+    #name-home-link {
+        font-size: var(--phone-mobile-font-size);
     }
 
+    p {
+        font-size: var(--phone-mobile-font-size);
+    }
+
+    h1 { 
+        font-size: var(--phone-mobile-h1-size);
+    }
+
+    h2 {
+        font-size: var(--phone-mobile-h2-size);
+    }
+
+    h3 {
+        font-size: var(--phone-mobile-h3-size);
+    }
+
+    h4 {
+        font-size: var(--phone-mobile-h4-size);
+    }
+    
     #nav-menu {
         display: none;
         visibility: hidden;
@@ -119,17 +138,55 @@
         width: 2em;
         color: black;
     }
+
+    .icon {
+        height: 3em;
+        width: 3em;
+    }
+    
+    .card-holder .preview-card {
+        width: 80%;
+    }
+
+    section > p {
+        font-size: var(--phone-mobile-font-size);
+    }
 }
 
 /* laptop */
-@media screen and (hover: hover) {
-    #bio {
-        background-color: yellow;
-    }
-
+@media (hover: hover) {
     #back-icon {
         display:none;
         visibility: hidden;
+    }
+
+    p {
+        font-size: var(--main-web-font-size);
+    }
+
+    h1 { 
+        font-size: var(--main-web-h1-size);
+    }
+
+    h2 {
+        font-size: var(--main-web-h2-size);
+    }
+
+    h3 {
+        font-size: var(--main-web-h3-size);
+    }
+
+    h4 {
+        font-size: var(--main-web-h4-size);
+    }   
+
+    .icon {
+        width: 2em;
+        height: 2em;
+    }
+
+    section > p {
+        width: 80%;
     }
 }
 
@@ -139,7 +196,6 @@ html {
 
 body, button{
     font-family: 'PT Sans Narrow', sans-serif;
-    /* font-size: 20px; */
 }
 
 header {
@@ -151,35 +207,13 @@ a {
     color: var(--main-color);
 }
 
-.icon {
-    width: 2em;
-    height: 2em;
-}
-
-h1 { 
-    font-size: var(--main-web-h1-size);
+h1 {
     display: inline-block;
-}
-
-h2 {
-    font-size: var(--main-web-h2-size);
-}
-
-h3 {
-    font-size: var(--main-web-h3-size);
-}
-
-h4 {
-    font-size: var(--main-web-h4-size);
 }
 
 h1, h2, h3 {
     transform: rotate(-4deg);
     color: var(--accent-color-darker);
-}
-
-p {
-    font-size: var(--main-web-font-size);
 }
 
 #name-home-link, h1, h2, h3 {
@@ -198,7 +232,6 @@ section {
     section > p {
         margin: 0 auto;
         text-align: center;
-        width: 80%;
     }
 
 footer {
@@ -300,7 +333,7 @@ footer {
 
 /* bigger screen sizes*/
 /* horizontalize */
-@media (min-width: 1001px) {
+@media (min-width: 1001px) and (hover: hover) {
     #hero-container {
         display: flex;
         flex-direction: row;
@@ -314,7 +347,7 @@ footer {
             margin: auto 0;
         }
         
-    .cardholder {
+    .card-holder {
         display: flex;
         justify-content: space-evenly;
     }
