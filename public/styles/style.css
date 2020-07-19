@@ -35,7 +35,7 @@
 
 /* smaller screen size */
 /* verticalize */
-@media (max-width:1000px) {
+@media (max-width: 1000px) {
     main {
         text-align: center;
     }
@@ -76,22 +76,24 @@
     }
 }
 
-/* tablet */
-@media (min-width: 501px) and (max-width: 1000px) and (hover:none) {
-    #about {
-        background-color: brown;
-    }
-}
-
 /* phone */
-@media (min-width: 0px) and (max-width: 500px) and (hover:none) {
+@media (max-width: 500px) and 
+        (hover: none) and (pointer: coarse) {
     #about {
         background-color: blue;
     }
 }
 
+/* tablet */
+@media (min-width: 501px) and (max-width: 1000px) and 
+        (hover: none) and (pointer: coarse) {
+    #about {
+        background-color: brown;
+    }
+}
+
 /* touchscreen device */
-@media screen and (hover:none){
+@media (hover: none) and (pointer: coarse){
     /* place hamburger here */
     #bio {
         background-color: aqua;
@@ -155,7 +157,7 @@ h1, h2, h3 {
     color: var(--accent-color-darker);
 }
 p {
-    /* font-size: var(--main-web-font-size); */
+    font-size: var(--main-web-font-size);
 }
 
 #name-home-link, h1, h2, h3 {
