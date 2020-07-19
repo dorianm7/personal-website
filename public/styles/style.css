@@ -166,6 +166,7 @@ h1, h2, h3 {
     transform: rotate(-4deg);
     color: var(--accent-color-darker);
 }
+
 p {
     font-size: var(--main-web-font-size);
 }
@@ -265,9 +266,9 @@ footer {
 }
 
 #nav-menu {
-    margin: 0 0 0 auto;
+    margin: auto 0 auto auto;
     padding: 0;
-    display: flex;
+    display: inline-flex;
 }
 
     #nav-menu > .menu-item > a:hover,
