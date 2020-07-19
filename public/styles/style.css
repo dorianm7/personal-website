@@ -63,6 +63,7 @@
 
     #contact-card > img {
         display: none;
+        visibility: hidden;
     }
 }
 
@@ -251,6 +252,14 @@ footer {
         display: flex;
         justify-content: space-evenly;
     }
+    
+    #contact-card img {
+        width:10em;
+    }
+    
+    #contact-info {
+        padding-right: 10px;
+    }
 }
 
 #hero-info {
@@ -265,12 +274,9 @@ footer {
         margin: 0 0;
     }
 
-
-
 #hero-social-contact-container {
     margin: 3% 0;
 }
-
 
 #contact-card {
     text-align: center;
@@ -278,16 +284,6 @@ footer {
     justify-content: center;
     align-items: center;
     margin: 0 auto;
-    /* border: 3px solid var(--accent-color); */
-    /* box-shadow: -3px 3px 5px -3px black; */
     padding: 10px;
     border-radius: 10px;
-}
-
-#contact-card img {
-    width:10em;
-}
-
-#contact-info {
-    padding-right: 10px;
 }
