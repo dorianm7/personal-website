@@ -35,7 +35,7 @@
 
 .hide {
     display: none;
-    visibility: none;
+    visibility: hidden;
 }
 
 /* smaller screen size */
@@ -183,8 +183,7 @@ section {
     margin: 1%;
 }
 
-    section > p
-    {
+    section > p {
         margin: 0 auto;
         text-align: center;
         width: 80%;
@@ -231,8 +230,6 @@ footer {
     .dropdown:hover .menu-item{
         display: block;
     }
-
-
 
 .preview-card {
     width: 30%;
