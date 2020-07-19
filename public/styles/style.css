@@ -30,6 +30,7 @@
     --main-web-h3-size: calc(var(--main-web-font-size) + 25px);
     --main-web-h2-size: calc(var(--main-web-font-size) + 35px);
     --main-web-h1-size: calc(var(--main-web-font-size) + 45px);
+    --small-web-nav-font-size: calc(var(--main-web-font-size) * .95);
 
 }
 
@@ -75,6 +76,11 @@
         margin: 0 auto;
     }        
 
+    #navbar > #name-home-link,
+    #nav-menu {
+        font-size: var(--small-web-nav-font-size);
+    }
+
     #contact-card > img {
         display: none;
         visibility: hidden;
@@ -119,6 +125,11 @@
 @media screen and (hover: hover) {
     #bio {
         background-color: yellow;
+    }
+
+    #back-icon {
+        display:none;
+        visibility: hidden;
     }
 }
 
@@ -269,6 +280,7 @@ footer {
     margin: auto 0 auto auto;
     padding: 0;
     display: inline-flex;
+    flex-wrap: wrap;
 }
 
     #nav-menu > .menu-item > a:hover,
