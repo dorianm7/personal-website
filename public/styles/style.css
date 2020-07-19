@@ -20,6 +20,8 @@
     --header-color: var(--accent-color);
     --navbar-color: var(--accent-color); 
     --navbar-menu-item-hover-color: var(--accent-color-dark); 
+    /* --background-color: hsl(var(--accent-color-hue), var(--accent-color-saturation), calc(var(--accent-color-lightness) + 48.5%)); */
+    --background-color: white;
     --navbar-menu-item-padding: 5px;
     --navbar-submenu-margin-top: calc(var(--navbar-menu-item-padding) - 1px);
     --dropdown-menu-color: var(--navbar-menu-item-hover-color);
@@ -38,6 +40,10 @@
     --phone-mobile-h2-size: calc(var(--phone-mobile-font-size) + 35px);
     --phone-mobile-h1-size: calc(var(--phone-mobile-font-size) + 45px);
 
+}
+
+html {
+    background-color: white;
 }
 
 .hide {
@@ -148,7 +154,7 @@
         width: 80%;
     }
 
-    section > p {
+    section p {
         font-size: var(--phone-mobile-font-size);
     }
 }
@@ -185,6 +191,12 @@
         height: 2em;
     }
 
+    .card-logo {
+        width: 400px;
+        height: 400px;
+        margin-bottom: 1em;
+    }
+
     section > p {
         width: 80%;
     }
@@ -200,6 +212,7 @@ body, button{
 
 header {
     background-color: var(--header-color);
+    border: 1em solid var(--header-color);
 }
 
 a {
@@ -207,7 +220,7 @@ a {
     color: var(--main-color);
 }
 
-h1 {
+h1, h2 {
     display: inline-block;
 }
 
@@ -216,13 +229,23 @@ h1, h2, h3 {
     color: var(--accent-color-darker);
 }
 
-#name-home-link, h1, h2, h3 {
+h1, h2, h3, #name-home-link {
     font-family: 'Caveat', cursive;
+}
+
+h2 {
+    width: 100%;
 }
 
 main {
     width: 90%;
-    margin: 0px auto 0px auto;
+    margin: 0 auto;
+    /* padding: 0 auto; */
+    background-color: var(--background-color);
+}
+
+body {
+    background-image: url(/images/polka.png);
 }
 
 section {
@@ -236,6 +259,11 @@ section {
 
 footer {
     text-align: center;
+    background-color: var(--background-color);
+}
+
+footer p {
+    margin: 0 auto;
 }
 
 .menu {
@@ -375,6 +403,18 @@ footer {
 
 #hero-social-contact-container {
     margin: 3% 0;
+}
+
+#about {
+    margin-top: 0;
+}
+
+#contact {
+    margin-bottom: 0;
+}
+
+hr {
+    margin-top: 0;
 }
 
 #contact-card {
