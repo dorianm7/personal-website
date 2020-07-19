@@ -26,7 +26,7 @@
     --dropdown-menu-hover-color: var(--accent-color-darker); 
 }
 
-body {
+body, button{
     font-family: 'PT Sans Narrow', sans-serif;
     font-size: 20px;
 }
@@ -154,6 +154,8 @@ footer {
     color: white;
     background-color: var(--accent-color-dark);
     box-shadow: -3px 3px 5px -3px black;
+    font-size: 25px;
+    border: none;
 }
 
 #navbar {
