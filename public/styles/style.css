@@ -27,6 +27,10 @@
 }
 
 @media (max-width:1000px) {
+    main {
+        text-align: center;
+    }
+
     #hero-container {
         display: flex;
         flex-direction: column;
@@ -217,8 +221,7 @@ footer {
     /* placeholder */
 }
 
-@media (min-width: 1001px)
-{
+@media (min-width: 1001px) {
     #hero-container {
         display: flex;
         flex-direction: row;
