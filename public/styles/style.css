@@ -26,6 +26,10 @@
     --dropdown-menu-hover-color: var(--accent-color-darker); 
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body, button{
     font-family: 'PT Sans Narrow', sans-serif;
     font-size: 20px;
@@ -96,6 +100,8 @@ footer {
 .menu-item > a {
     padding: var(--navbar-menu-item-padding);
 }
+
+.menu-item > a:
 
 .dropdown {
 
@@ -189,12 +195,13 @@ footer {
     display: flex;
     flex-direction: row;
     margin-right: 10%;
-    height: 20em;
+    height: 22em;
 }
 
     #hero-container img {
         width: 20em;
         height: 20em;
+        margin: auto 0;
     }
 
 #hero-info {
