@@ -33,6 +33,11 @@
 
 }
 
+.hide {
+    display: none;
+    visibility: none;
+}
+
 /* smaller screen size */
 /* verticalize */
 @media (max-width: 1000px) {
@@ -94,14 +99,19 @@
 
 /* touchscreen device */
 @media (hover: none) and (pointer: coarse){
-    /* place hamburger here */
     #bio {
-        background-color: aqua;
+        background-color: blue;
     }
 
     #nav-menu {
         display: none;
         visibility: hidden;
+    }
+
+    #back-icon{
+        height: 2em;
+        width: 2em;
+        color: black;
     }
 }
 
