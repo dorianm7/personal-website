@@ -31,6 +31,17 @@
         text-align: center;
     }
 
+    .cardholder {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .cardholder .preview-card {
+        width: 60%;
+    }
+
     #hero-container {
         display: flex;
         flex-direction: column;
@@ -163,10 +174,7 @@ footer {
         display: block;
     }
 
-.cardholder {
-    display: flex;
-    justify-content: space-evenly;
-}
+
 
 .preview-card {
     width: 30%;
@@ -234,6 +242,11 @@ footer {
             height: 20em;
             margin: auto 0;
         }
+        
+    .cardholder {
+        display: flex;
+        justify-content: space-evenly;
+    }
 }
 
 #hero-info {
