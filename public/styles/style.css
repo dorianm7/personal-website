@@ -7,9 +7,7 @@
     --main-color-saturation: 100%;
     --main-color-lightness: 0%;
     --main-color: hsl(var(--main-color-hue), var(--main-color-saturation), var(--main-color-lightness));
-    /* --accent-color-hue: 150; */
     --accent-color-hue: 160;
-    /* --accent-color-hue: 280; */
     --accent-color-saturation: 100%;
     --accent-color-lightness: 50%;
     --accent-color: hsl(var(--accent-color-hue), var(--accent-color-saturation), var(--accent-color-lightness));
@@ -20,7 +18,6 @@
     --header-color: var(--accent-color);
     --navbar-color: var(--accent-color); 
     --navbar-menu-item-hover-color: var(--accent-color-dark); 
-    /* --background-color: hsl(var(--accent-color-hue), var(--accent-color-saturation), calc(var(--accent-color-lightness) + 48.5%)); */
     --background-color: white;
     --navbar-menu-item-padding: 5px;
     --navbar-submenu-margin-top: calc(var(--navbar-menu-item-padding) - 1px);
@@ -63,6 +60,11 @@ html {
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
+    }
+    
+    .icon {
+        width: 4em;
+        height: 4em;
     }
 
     #hero-container {
@@ -153,8 +155,13 @@ html {
     .card-holder .preview-card {
         width: 80%;
     }
+    
+    .card-logo {
+        height: 50%;
+        width: 50%;
+    }
 
-    section p {
+    section p, .button-like {
         font-size: var(--phone-mobile-font-size);
     }
 }
@@ -186,18 +193,13 @@ html {
         font-size: var(--main-web-h4-size);
     }   
 
-    .icon {
-        width: 2em;
-        height: 2em;
-    }
-
     .card-logo {
-        width: 400px;
-        height: 400px;
+        width: 25%;
+        height: 25%;
         margin-bottom: 1em;
     }
 
-    section > p {
+    section p {
         width: 80%;
     }
 }
@@ -240,7 +242,6 @@ h2 {
 main {
     width: 90%;
     margin: 0 auto;
-    /* padding: 0 auto; */
     background-color: var(--background-color);
 }
 
@@ -252,7 +253,7 @@ section {
     margin: 1%;
 }
 
-    section > p {
+    section p {
         margin: 0 auto;
         text-align: center;
     }
@@ -354,11 +355,6 @@ footer p {
         /* placeholder*/
     }
 
-#name-home-link {
-    /* background-color: bisque; */
-    /* placeholder */
-}
-
 /* bigger screen sizes*/
 /* horizontalize */
 @media (min-width: 1001px) and (hover: hover) {
@@ -380,6 +376,11 @@ footer p {
         justify-content: space-evenly;
     }
     
+    .icon {
+        width: 4em;
+        height: 4em;
+    }
+
     #contact-card img {
         width:10em;
     }
@@ -387,6 +388,7 @@ footer p {
     #contact-info {
         padding-right: 10px;
     }
+
 }
 
 #hero-info {
@@ -397,7 +399,7 @@ footer p {
     #hero-info > p {
         padding: 1em 0;
         border: 1px solid black;
-        background-color: rgba(240, 248, 255, .9);
+        background-color: rgba(255, 255, 255, .8);
         margin: 0 0;
     }
 
