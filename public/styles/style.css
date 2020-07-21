@@ -36,7 +36,8 @@
     --phone-mobile-h3-size: calc(var(--phone-mobile-font-size) + 25px);
     --phone-mobile-h2-size: calc(var(--phone-mobile-font-size) + 35px);
     --phone-mobile-h1-size: calc(var(--phone-mobile-font-size) + 45px);
-
+    --button-like-unactive-shadow: -3px 3px 5px -3px black;
+    --button-like-active-shadow: -2px 2px 5px -3px black;
 }
 
 html {
@@ -273,6 +274,7 @@ footer p {
 
 .menu-item > a {
     padding: var(--navbar-menu-item-padding);
+    transition: background-color .3s 0s;
 }
 
 .dropdown {
@@ -326,9 +328,14 @@ footer p {
     text-decoration: none;
     color: white;
     background-color: var(--accent-color-dark);
-    box-shadow: -3px 3px 5px -3px black;
+    box-shadow: var(--button-like-unactive-shadow); 
     font-size: var(--main-web-font-size);
     border: none;
+}
+
+.button-like:active {
+    background-color: var(--accent-color-darker);
+    box-shadow: var(--button-like-active-shadow);
 }
 
 #navbar {
