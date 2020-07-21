@@ -1,6 +1,8 @@
 <!-- Part 5 -->
 
 <!-- Detail changes added to portfolio site in support of making it more useful or pleasing -->
+Added slight animation when hovering over the nav links.
+Added visual feedback when pressing a button.
 
 <!-- Modify portfolio site to use 3rd party JS to perform useful tasks -->
   <!-- suggestion 
