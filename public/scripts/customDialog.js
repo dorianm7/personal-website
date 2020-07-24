@@ -72,7 +72,7 @@ const myAlert = (string) => {
     dialog.showModal();
 };
 
-const myConfirm = async (string) => {
+const myConfirm = (string) => {
     let dialog = createDialog('confirm', string);
     let buttonEls = dialog.querySelectorAll('button');
     let cancelButton = buttonEls[0];
