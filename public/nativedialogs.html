@@ -67,7 +67,7 @@ npx eslint file.js -->
             promptEl.addEventListener('click', () => {
                 let res = window.prompt('What is your name?');
                 if(res) {
-                    outputEl.innerHTML = `The value return by the confirm method is: ${res}`;
+                    outputEl.innerHTML = `Prompt result: ${res}`;
                 }
                 else {
                     outputEl.innerHTML = 'User didn\'t enter anything';
@@ -84,7 +84,7 @@ npx eslint file.js -->
             safePromptEl.addEventListener('click', () => {
                 let res = window.prompt('What is your name?');
                 if(res) {
-                    outputEl.innerHTML = promptTag`The value return by the confirm method is: ${res}`;
+                    outputEl.innerHTML = promptTag`Prompt result: ${res}`;
                 }
                 else {
                     outputEl.innerHTML = 'User didn\'t enter anything';
