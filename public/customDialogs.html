@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Custom Dialogs</title>
+    <script src="../node_modules/dompurify/dist/purify.min.js"></script>
     <script src="customDialog.js" type="module"></script>
     <script type="module">
         import {myAlert, myConfirm, myPrompt, createDialog} from './customDialog.js';
@@ -62,6 +63,7 @@
                 let cancelButton = buttons[0];
                 let okButton = buttons[1];
                 cancelButton.addEventListener('click', () => {
+                    promptDialog.returnValue = null;
                     outputEl.innerHTML = 'User didn\'t enter anything.';
                     promptDialog.close(false);
                     promptDialog.parentNode.removeChild(promptDialog);
@@ -75,6 +77,35 @@
 
                 document.body.appendChild(promptDialog);
                 promptDialog.showModal();
+            });
+
+            const promptTag = (strings, name) => {
+                let firstStr = strings[0];
+                let cleanInput = DOMPurify.sanitize(name);
+                return `${firstStr}${cleanInput}`;
+            };
+
+            saferPromptButton.addEventListener('click', () => {
+                let saferPromptDialog = createDialog('prompt', 'What is your name?');
+                let textEl = saferPromptDialog.querySelector('input');
+                let buttons = saferPromptDialog.querySelectorAll('button');
+                let cancelButton = buttons[0];
+                let okButton = buttons[1];
+                cancelButton.addEventListener('click', () => {
+                    saferPromptDialog.returnValue = null;
+                    outputEl.innerHTML = 'User didn\'t enter anything.';
+                    saferPromptDialog.close(false);
+                    saferPromptDialog.parentNode.removeChild(saferPromptDialog);
+                });
+                okButton.addEventListener('click', () => {
+                    saferPromptDialog.returnValue = promptTag`${textEl.value}`;
+                    outputEl.innerHTML = promptTag`Prompt result: ${saferPromptDialog.returnValue}`;
+                    saferPromptDialog.close(true);
+                    saferPromptDialog.parentNode.removeChild(saferPromptDialog);
+                });
+
+                document.body.appendChild(saferPromptDialog);
+                saferPromptDialog.showModal();
             });
         });
 
