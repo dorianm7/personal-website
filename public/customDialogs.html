@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Custom Dialogs</title>
+    <script src="customDialog.js" type="module"></script>
+    <script type="module">
+        import {myAlert, myConfirm, myPrompt, createDialog} from './customDialog.js';
+        window.addEventListener('DOMContentLoaded', () => {
+            let alertButton = document.getElementById('alert');
+            let confirmButton  = document.getElementById('confirm');
+            let promptButton = document.getElementById('prompt');
+            let saferPromptButton = document.getElementById('safe-prompt');
+            let outputEl = document.getElementById('output');
+
+            alertButton.addEventListener('click', () => {
+                myAlert('Alert!');
+            });
+
+            confirmButton.addEventListener('click', () => {
+                // let result = myConfirm('Do you confirm this?');
+                
+                // if(result){
+                //     outputEl.innerHTML = `The value return by the confirm method is: ${result}`;
+                // }
+                // else{
+                //     outputEl.innerHTML = 'User didn\'t enter anything';
+                // }
+
+                let confirmDialog = createDialog('confirm', 'Do you confirm this?');
+                let buttons = confirmDialog.querySelectorAll('button');
+                let cancelButton = buttons[0];
+                let okButton = buttons[1];
+                cancelButton.addEventListener('click', () => {
+                    outputEl.innerHTML = 'User didn\'t enter anything.';
+                    confirmDialog.close(false);
+                    confirmDialog.parentNode.removeChild(confirmDialog);
+                });
+                okButton.addEventListener('click', () => {
+                    confirmDialog.returnValue = true;
+                    outputEl.innerHTML = `The value return by the confirm method is: ${confirmDialog.returnValue}`;
+                    confirmDialog.close(true);
+                    confirmDialog.parentNode.removeChild(confirmDialog);
+                });
+
+                document.body.appendChild(confirmDialog);
+                confirmDialog.showModal();
+            });
+
+            promptButton.addEventListener('click', () => {
+                let result = myPrompt('What is your name?');
+                if(result) {
+                    outputEl.innerHTML = `The value return by the confirm method is: ${res}`;
+                }
+                else {
+                    outputEl.innerHTML = 'User didn\'t enter anything';
+                }
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <main>
+        <p>Test</p>
+        <form>
+            <input type="button" value="Alert" id="alert">
+            <input type="button" value="Confirm" id="confirm">
+            <input type="button" value="Prompt" id="prompt">
+            <input type="button" value="Safe Prompt" id="safe-prompt">
+
+            <output for="alert confirm prompt safe-prompt" name="result" id="output"></output>
+        </form>
+    </main>
+</body>
+</html>
