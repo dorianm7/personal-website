@@ -48,13 +48,33 @@
             });
 
             promptButton.addEventListener('click', () => {
-                let result = myPrompt('What is your name?');
-                if(result) {
-                    outputEl.innerHTML = `The value return by the confirm method is: ${res}`;
-                }
-                else {
-                    outputEl.innerHTML = 'User didn\'t enter anything';
-                }
+                // let result = myPrompt('What is your name?');
+                // if(result) {
+                //     outputEl.innerHTML = `The value return by the confirm method is: ${res}`;
+                // }
+                // else {
+                //     outputEl.innerHTML = 'User didn\'t enter anything';
+                // }
+
+                let promptDialog = createDialog('prompt', 'What is your name?');
+                let textEl = promptDialog.querySelector('input');
+                let buttons = promptDialog.querySelectorAll('button');
+                let cancelButton = buttons[0];
+                let okButton = buttons[1];
+                cancelButton.addEventListener('click', () => {
+                    outputEl.innerHTML = 'User didn\'t enter anything.';
+                    promptDialog.close(false);
+                    promptDialog.parentNode.removeChild(promptDialog);
+                });
+                okButton.addEventListener('click', () => {
+                    promptDialog.returnValue = textEl.value;
+                    outputEl.innerHTML = `Prompt result: ${promptDialog.returnValue}`;
+                    promptDialog.close(true);
+                    promptDialog.parentNode.removeChild(promptDialog);
+                });
+
+                document.body.appendChild(promptDialog);
+                promptDialog.showModal();
             });
         });
 
