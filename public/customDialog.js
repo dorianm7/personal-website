@@ -10,3 +10,108 @@
 //      You will use variety of DOM methods to add, modify, 
 //          and read various aspects of the element put on the page
 
+// functions inside
+
+const myAlertTemplate = document.createElement('template');
+myAlertTemplate.innerHTML = `<dialog>
+                                <p></p>
+                                <button>Ok</button>
+                            </dialog>`;
+
+const myConfirmTemplate = document.createElement('template');
+myConfirmTemplate.innerHTML =   `<dialog>
+                                    <p></p>
+                                    <button>Cancel</button>
+                                    <button>Ok</button>
+                                </dialog>`;
+
+const myPromptTemplate = document.createElement('template');
+myPromptTemplate.innerHTML =    `<dialog>
+                                    <p></p>
+                                    <input type="text">
+                                    <button>Cancel</button>
+                                    <button>Ok</button>
+                                </dialog>`;
+
+const returnTemplate = (type) => {
+    let template;
+    switch(type) {
+        case 'alert':
+            template = myAlertTemplate;
+            break;
+        case 'confirm':
+            template = myConfirmTemplate;
+            break;
+        case 'prompt':
+            template = myPromptTemplate;
+            break;
+    }
+
+    return template;
+}
+
+const createDialog = (type, string) => {
+    let template = returnTemplate(type);
+    let dialog = template.content
+                        .firstElementChild
+                        .cloneNode(true);
+    let pEl = dialog.querySelector('p');
+    pEl.innerText = string;
+    return dialog;
+};
+
+const myAlert = (string) => {
+    let dialog = createDialog('alert', string);
+    let dialogButton = dialog.querySelector('button');
+    dialogButton.addEventListener('click', () => {
+        dialog.close();
+        dialog.parentNode.removeChild(dialog);
+    });
+
+    document.body.appendChild(dialog);
+    dialog.showModal();
+};
+
+const myConfirm = async (string) => {
+    let dialog = createDialog('confirm', string);
+    let buttonEls = dialog.querySelectorAll('button');
+    let cancelButton = buttonEls[0];
+    let okButton = buttonEls[1];
+
+    cancelButton.addEventListener('click', () => {
+        dialog.close(false);
+        dialog.parentNode.removeChild(dialog);
+    });
+
+    okButton.addEventListener('click', () => {
+        dialog.close(true);
+        dialog.parentNode.removeChild(dialog);
+    });
+
+    document.body.appendChild(dialog);
+    dialog.showModal();
+};
+
+const myPrompt = (string) => {
+    let dialog = createDialog('prompt', string);
+    let textEl = dialog.querySelector('input');
+    let buttonEls = dialog.querySelectorAll('button');
+    let cancelButton = buttonEls[0];
+    let okButton = buttonEls[1];
+
+    cancelButton.addEventListener('click', () => {
+        dialog.close(null);
+        dialog.parentNode.removeChild(dialog);
+    });
+
+    okButton.addEventListener('click', () => {
+        dialog.close(textEl.value);
+        dialog.parentNode.removeChild(dialog);
+    });
+
+    document.body.appendChild(dialog);
+    dialog.showModal();
+};
+
+// export them at the end
+export {myAlert, myConfirm, myPrompt, createDialog};
