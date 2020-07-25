@@ -16,17 +16,29 @@ blogDialogTemplate.innerHTML =  `<dialog>
 const blogPostTemplate = document.createElement('template');
 blogPostTemplate.innerHTML =    `<div class="blog-post">
                                     <p class="blog-title"></p>
-                                    <time class="blog-time"></time>
+                                    <time class="blog-date"></time>
                                     <p class="blog-summary">
                                     <button class="blog-button">Edit</button>
                                     <button class="blog-button">Delete</button>
                                 </div>`;
 
-//not adding listeners yet.
 const createBlogDialog = () => {
     return blogDialogTemplate.content
                             .firstElementChild
                             .cloneNode(true);
 } 
 
-export {createBlogDialog};
+const createBlogPost = (title = '', date = '', summary = '') => {
+    let blogPost = blogPostTemplate.content
+                                    .firstElementChild
+                                    .cloneNode(true);
+    let titleEl = blogPost.querySelector('.blog-title');
+    let timeEl = blogPost.querySelector('.blog-date');
+    let summaryEl = blogPost.querySelector('.blog-summary');
+    titleEl.innerText = title;
+    timeEl.innerText = date;
+    summaryEl.innerText = summary;
+    return blogPost;
+}
+
+export {createBlogDialog, createBlogPost};
