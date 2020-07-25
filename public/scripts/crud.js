@@ -17,12 +17,12 @@ const setUpDialog = () => {
     document.body.appendChild(dialog);
 
     //set up listeners
-    let cancelButton = dialog.getElementById('cancel');
+    let cancelButton = dialog.querySelector('#cancel');
     cancelButton.addEventListener('click', () => {
         dialog.close(false);
     });
     
-    let okButton = dialog.getElementById('save');
+    let okButton = dialog.querySelector('#save');
     okButton.addEventListener('click', () => {
         dialog.close(false);
         //get title, date, summary 
