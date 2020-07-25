@@ -1,6 +1,6 @@
 const blogDialogTemplate = document.createElement('template');
 blogDialogTemplate.innerHTML =  `<dialog>
-                                    <form>
+                                    <form method="dialog">
                                         <label for="title">Title</label>
                                         <input type="text" id="title">
                                         <label for="date">Date</label>
@@ -23,16 +23,10 @@ blogPostTemplate.innerHTML =    `<div class="blog-post">
                                 </div>`;
 
 //not adding listeners yet.
-const createBlogDialog = (title = '', date = '', summary = '') => {
-    let dialog = blogDialogTemplate.content
+const createBlogDialog = () => {
+    return blogDialogTemplate.content
                             .firstElementChild
                             .cloneNode(true);
-    let titleEl = dialog.querySelector('#title');
-    let dateEl = dialog.querySelector('#date');
-    let summaryEl = dialog.querySelector('#summary');
-    titleEl.value = title;
-    dateEl.value = date;
-    summaryEl.value = summary; 
-
-    return dialog;
 } 
+
+export {createBlogDialog};
