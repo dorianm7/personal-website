@@ -5,6 +5,15 @@ var dialog;
 var blogs = [{title: 'Title1', date: '10/11/12', summary: 'Summary1'},
             {title: 'Title2', date: '10/11/12', summary: 'Summary2'}];
 
+const tableRowTemplate = document.createElement('template');
+tableRowTemplate.innerHTML =    `<tr><td></td></tr>`;
+
+const createTableRow = () => {
+    return tableRowTemplate.content
+                            .firstElementChild
+                            .cloneNode(true);
+};
+
 const setUpAddButton = () => {
     let addButton = document.getElementById('add-button');
     addButton.addEventListener('click', () => {
