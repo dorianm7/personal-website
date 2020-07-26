@@ -51,7 +51,8 @@ const setUpDialog = (dialog) => {
         blogs.push(blog);
 
         //place blog post to table
-        blogToTable(blog);
+        let blogPost = createBlogPost(blog.title, blog.date, blog.summary);
+        addToTable(blogPost);
 
         //remove dialog from document
         dialog.close(false);
@@ -59,15 +60,14 @@ const setUpDialog = (dialog) => {
     });
 };
 
-const blogToTable = (blog) => {
-    let blogPost = createBlogPost(blog.title, blog.date, blog.summary);
+//Item must be a DOM node
+const addToTable = (item) => {
     let blogTableRow = createTableRow();
-    let blogTableRowTD = blogTableRow.querySelector('td');
-
-    blogTableRowTD.appendChild(blogPost);
-    
+    let blowTableRowTD = blogTableRow.querySelector('td');
     let table = document.getElementById('blogs');
-    table.appendChild(blogTableRow);
+
+    blogTableRowTD.appendChild(item);
+    table.appendChild(blowTableRow);
 };
 
 //Wire up elements here
@@ -76,3 +76,8 @@ document.addEventListener('DOMContentLoaded', () => {
     //read array
     //place array elements into table
 });
+
+//read from local storage and place in array 
+    //from array, place into table
+
+//on local storage change 
