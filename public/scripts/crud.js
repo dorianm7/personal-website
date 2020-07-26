@@ -1,8 +1,8 @@
 import {createBlogDialog, createBlogPost} from './blog.js';
 
 //will add listeners from crud.html in here
-var blogs = [{title: 'Title1', date: '10/11/12', summary: 'Summary1'},
-            {title: 'Title2', date: '10/11/12', summary: 'Summary2'}];
+var blogs = [{title: 'Title1', date: '1914-11-12', summary: 'Summary1'},
+            {title: 'Title2', date: '1914-11-12', summary: 'Summary2'}];
 
 const tableRowTemplate = document.createElement('template');
 tableRowTemplate.innerHTML =    `<tr><td></td></tr>`;
@@ -84,7 +84,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //read array
     let blogPostEls = blogs.map((post) => {
-        return createBlogPost(post.title, post.date, post.summary);
+        let blogPostEl = createBlogPost(post.title, post.date, post.summary);
+        let buttonEls = blogPostEl.querySelectorAll('button');
+        //add listener to edit button
+        let editButtonEl = buttonEls[0];
+//TODO
+        editButtonEl.addEventListener('click', () => {
+            console.log(`edit button clicked on ${post.title}`);
+            //get from table
+                //place values into blogDialog
+            let blogDialog = createBlogDialog(post.title, post.date, post.summary);
+            
+            //open blogDialog
+        });
+
+        //add listener to delete button
+        let deleteButtonEl = buttonEls[1];
+        deleteButtonEl.addEventListener('click', () => {
+            console.log(`delete button clicked on ${post.title}`);
+            //delete from array
+
+            //delete from local storage
+
+            //remove from table
+        });
+
+        return blogPostEl;
     });
     //place array elements into table
     blogPostEls.forEach(postEl => addToTable(postEl));
