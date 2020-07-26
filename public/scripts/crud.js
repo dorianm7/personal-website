@@ -18,9 +18,9 @@ const setUpAddButton = () => {
     let addButton = document.getElementById('add-button');
     addButton.addEventListener('click', () => {
         let dialog = createBlogDialog();
-        document.body.appendChild(dialog);
         setUpCancel(dialog);
         setUpSave(dialog);
+        document.body.appendChild(dialog);
         dialog.showModal();
     });
 };
@@ -34,10 +34,10 @@ const setUpCancel = (dialog) => {
     });
 };
 
-const setUpSave = (dialog) => {
+const setUpSave = (dialog, oldPost = undefined) => {
     let saveButton = dialog.querySelector('#save');
     saveButton.addEventListener('click', () => {
-        //get title, date, summary 
+        //get title, date, summary from dialog 
         let titleEl = dialog.querySelector('#title'); 
         let timeEl = dialog.querySelector('#date');
         let summaryEl = dialog.querySelector('#summary');
@@ -47,16 +47,33 @@ const setUpSave = (dialog) => {
 
         //create blog object
         let blog = {title: titleString, date: dateString, summary: summaryString};
+        if(!oldPost)
+        {
+            //add blog object to array
+            blogsArr.push(blog);
 
-        //add blog object to array
-        blogsArr.push(blog);
+            //add blog object to local storage
 
-        //add blog object to local storage
-
-        //place blog post to table
-        let blogPost = createBlogPost(blog.title, blog.date, blog.summary);
-        addToTable(blogPost);
-
+            //place blog post to table
+            let blogPost = createBlogPost(blog.title, blog.date, blog.summary);
+            setUpEdit(blogPost);
+            //TODO setup delete
+            addToTable(blogPost);
+        }
+        else //editing
+        {
+            //replace old, with edited
+            let index = blogsArr.findIndex((post) => {
+                return (post.title === oldPost.title &&
+                        post.date === oldPost.date &&
+                        post.summary === oldPost.summary);
+            });
+            blogsArr[index] = blog;
+            let blogPost = createBlogPost(blog.title, blog.date, blog.summary);
+            setUpEdit(blogPost);
+            //TODO setup delete
+            replaceInTable(blogPost, index);
+        }
         //remove dialog
         dialog.close(false);
         dialog.parentNode.removeChild(dialog);
@@ -73,9 +90,33 @@ const addToTable = (item) => {
     table.appendChild(blogTableRow);
 };
 
-//on local storage change, update table?
-//  already being done by blog post dialog save button
+const replaceInTable = (item, index) => {
+    let blogTableRowTD = document.createElement('td');
+    let table = document.getElementById('blogs');
+    let tableRows = table.querySelectorAll('tr');
 
+    blogTableRowTD.appendChild(item);
+    tableRows[index].innerHTML = '';//remove innards
+    tableRows[index].appendChild(blogTableRowTD);
+};
+
+const setUpEdit = (blogPostEl) => {
+    let buttonEls = blogPostEl.querySelectorAll('button');
+    let editButtonEl = buttonEls[0];
+    let oldTitle = blogPostEl.querySelector('.blog-title').innerText;
+    let oldDate = blogPostEl.querySelector('.blog-date').innerText;
+    let oldSummary = blogPostEl.querySelector('.blog-summary').innerText;
+
+    let oldPost = {title: oldTitle, date: oldDate, summary: oldSummary};
+
+    editButtonEl.addEventListener('click', () => {
+        let blogDialog = createBlogDialog(oldTitle, oldDate, oldSummary);
+        setUpCancel(blogDialog);
+        setUpSave(blogDialog, oldPost);
+        document.body.appendChild(blogDialog);
+        blogDialog.showModal();
+    });
+};
 
 //Wire up elements here
 document.addEventListener('DOMContentLoaded', () => {
@@ -88,16 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let blogPostEl = createBlogPost(post.title, post.date, post.summary);
         let buttonEls = blogPostEl.querySelectorAll('button');
         //add listener to edit button
-        let editButtonEl = buttonEls[0];
-//TODO
-        editButtonEl.addEventListener('click', () => {
-            console.log(`edit button clicked on ${post.title}`);
-            //get from table
-                //place values into blogDialog
-            let blogDialog = createBlogDialog(post.title, post.date, post.summary);
-
-            //open blogDialog
-        });
+        setUpEdit(blogPostEl);
 
         //add listener to delete button
         let deleteButtonEl = buttonEls[1];
