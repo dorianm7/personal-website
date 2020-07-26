@@ -63,18 +63,23 @@ const setUpDialog = (dialog) => {
 //Item must be a DOM node
 const addToTable = (item) => {
     let blogTableRow = createTableRow();
-    let blowTableRowTD = blogTableRow.querySelector('td');
+    let blogTableRowTD = blogTableRow.querySelector('td');
     let table = document.getElementById('blogs');
 
     blogTableRowTD.appendChild(item);
-    table.appendChild(blowTableRow);
+    table.appendChild(blogTableRow);
 };
 
 //Wire up elements here
 document.addEventListener('DOMContentLoaded', () => {
     setUpAddButton();
     //read array
+    let blogPostEls = blogs.map((post) => {
+        return createBlogPost(post.title, post.date, post.summary);
+    });
+    
     //place array elements into table
+    blogPostEls.forEach(postEl => addToTable(postEl));
 });
 
 //read from local storage and place in array 
