@@ -17,7 +17,7 @@ const blogPostTemplate = document.createElement('template');
 blogPostTemplate.innerHTML =    `<div class="blog-post">
                                     <p class="blog-title"></p>
                                     <time class="blog-date"></time>
-                                    <p class="blog-summary">
+                                    <p class="blog-summary"></p>
                                     <button class="blog-button">Edit</button>
                                     <button class="blog-button">Delete</button>
                                 </div>`;
