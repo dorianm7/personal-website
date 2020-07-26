@@ -19,23 +19,24 @@ const setUpAddButton = () => {
     addButton.addEventListener('click', () => {
         let dialog = createBlogDialog();
         document.body.appendChild(dialog);
-        setUpDialog(dialog);
+        setupCancel(dialog);
+        setupSave(dialog);
         dialog.showModal();
     });
 };
 
-//called inside of setUpAddButton
-const setUpDialog = (dialog) => {
-    //set up listeners
+const setupCancel = (dialog) => {
     let cancelButton = dialog.querySelector('#cancel');
     cancelButton.addEventListener('click', () => {
+        //remove dialog
         dialog.close(false);
-        //remove dialog from document
         dialog.parentNode.removeChild(dialog);
     });
-    
-    let okButton = dialog.querySelector('#save');
-    okButton.addEventListener('click', () => {
+};
+
+const setupSave = (dialog) => {
+    let saveButton = dialog.querySelector('#save');
+    saveButton.addEventListener('click', () => {
         //get title, date, summary 
         let titleEl = dialog.querySelector('#title'); 
         let timeEl = dialog.querySelector('#date');
@@ -56,7 +57,7 @@ const setUpDialog = (dialog) => {
         let blogPost = createBlogPost(blog.title, blog.date, blog.summary);
         addToTable(blogPost);
 
-        //remove dialog from document
+        //remove dialog
         dialog.close(false);
         dialog.parentNode.removeChild(dialog);
     });
