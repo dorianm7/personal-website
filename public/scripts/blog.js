@@ -22,10 +22,17 @@ blogPostTemplate.innerHTML =    `<div class="blog-post">
                                     <button class="blog-button">Delete</button>
                                 </div>`;
 
-const createBlogDialog = () => {
-    return blogDialogTemplate.content
+const createBlogDialog = (title = '', date = '', summary = '') => {
+    let blogDialog = blogDialogTemplate.content
                             .firstElementChild
                             .cloneNode(true);
+    let titleEl = blogDialog.querySelector('#title'); 
+    let timeEl = blogDialog.querySelector('#date');
+    let summaryEl = blogDialog.querySelector('#summary');
+    titleEl.value = title;
+    timeEl.value = date; 
+    summaryEl.value = summary;
+    return blogDialog;
 } 
 
 const createBlogPost = (title = '', date = '', summary = '') => {
@@ -37,6 +44,7 @@ const createBlogPost = (title = '', date = '', summary = '') => {
     let summaryEl = blogPost.querySelector('.blog-summary');
     titleEl.innerText = title;
     timeEl.innerText = date;
+    console.log(date);
     summaryEl.innerText = summary;
     return blogPost;
 }
