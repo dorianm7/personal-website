@@ -1,7 +1,7 @@
 import {createBlogDialog, createBlogPost} from './blog.js';
 
 //will add listeners from crud.html in here
-var blogs = [{title: 'Title1', date: '1914-11-12', summary: 'Summary1'},
+var blogsArr = [{title: 'Title1', date: '1914-11-12', summary: 'Summary1'},
             {title: 'Title2', date: '1914-11-12', summary: 'Summary2'}];
 
 const tableRowTemplate = document.createElement('template');
@@ -49,7 +49,7 @@ const setUpSave = (dialog) => {
         let blog = {title: titleString, date: dateString, summary: summaryString};
 
         //add blog object to array
-        blogs.push(blog);
+        blogsArr.push(blog);
 
         //add blog object to local storage
 
@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //read from local storage, place into array
 
     //read array
-    let blogPostEls = blogs.map((post) => {
+    let blogPostEls = blogsArr.map((post) => {
         let blogPostEl = createBlogPost(post.title, post.date, post.summary);
         let buttonEls = blogPostEl.querySelectorAll('button');
         //add listener to edit button
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
             //get from table
                 //place values into blogDialog
             let blogDialog = createBlogDialog(post.title, post.date, post.summary);
-            
+
             //open blogDialog
         });
 

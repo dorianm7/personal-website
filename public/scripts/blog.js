@@ -44,7 +44,6 @@ const createBlogPost = (title = '', date = '', summary = '') => {
     let summaryEl = blogPost.querySelector('.blog-summary');
     titleEl.innerText = title;
     timeEl.innerText = date;
-    console.log(date);
     summaryEl.innerText = summary;
     return blogPost;
 }
