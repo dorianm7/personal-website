@@ -50,6 +50,8 @@ const setUpDialog = (dialog) => {
         //add blog object to array
         blogs.push(blog);
 
+        //add blog object to local storage
+
         //place blog post to table
         let blogPost = createBlogPost(blog.title, blog.date, blog.summary);
         addToTable(blogPost);
@@ -70,19 +72,20 @@ const addToTable = (item) => {
     table.appendChild(blogTableRow);
 };
 
+//on local storage change, update table?
+//  already being done by blog post dialog save button
+
+
 //Wire up elements here
 document.addEventListener('DOMContentLoaded', () => {
     setUpAddButton();
+
+    //read from local storage, place into array
+
     //read array
     let blogPostEls = blogs.map((post) => {
         return createBlogPost(post.title, post.date, post.summary);
     });
-    
     //place array elements into table
     blogPostEls.forEach(postEl => addToTable(postEl));
 });
-
-//read from local storage and place in array 
-    //from array, place into table
-
-//on local storage change 
