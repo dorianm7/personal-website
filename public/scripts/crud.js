@@ -187,8 +187,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //if deleted everything, start with some initial blogs
     if(!blogsArr){
-        blogsArr = [{title: 'Initial1', date: '1914-11-12', summary: 'Summary1'},
-                        {title: 'Initial2', date: '1914-11-12', summary: 'Summary2'}];
+        blogsArr = [{title: 'Initial1', date: '1914-11-12', summary: '1 Here is a short summary of something words.'},
+                        {title: 'Initial2', date: '1914-11-12', summary: '2 Here is a short summary of somethings words.'}];
         window.localStorage.setItem('blogs', JSON.stringify(blogsArr));
     }
 
