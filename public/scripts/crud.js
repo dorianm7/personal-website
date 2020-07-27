@@ -4,15 +4,6 @@ import {createBlogDialog, createBlogPost} from './blog.js';
 var blogsArr;
 var blogsArrLength; //used because array length lies when using delete
 
-const tableRowTemplate = document.createElement('template');
-tableRowTemplate.innerHTML =    `<tr><td></td></tr>`;
-
-const createTableRow = () => {
-    return tableRowTemplate.content
-                            .firstElementChild
-                            .cloneNode(true);
-};
-
 //sets up add button listener
 const setUpAddButton = () => {
     let addButton = document.getElementById('add-button');
@@ -51,15 +42,7 @@ const setUpSave = (dialog, oldPost = undefined) => {
         let blog = {title: titleString, date: dateString, summary: summaryString};
         if(!oldPost) //new post
         {
-            //add blog object to array
             blogsArr.push(blog);
-
-            //place blog post to table
-            let blogPost = createBlogPost(blog.title, blog.date, blog.summary);
-            setUpEdit(blogPost);
-            setUpDelete(blogPost);
-            addToTable(blogPost);
-            blogsArrLength++;
 
             //remove empty message
             let message = document.getElementById('empty-message');
@@ -69,16 +52,15 @@ const setUpSave = (dialog, oldPost = undefined) => {
         {
             //replace old, with edited
             let index = blogsArr.findIndex((post) => {
-                return (post.title === oldPost.title &&
+                if(post) {
+                    return (post.title === oldPost.title &&
                         post.date === oldPost.date &&
                         post.summary === oldPost.summary);
+                }
             });
             blogsArr[index] = blog;
-            let blogPost = createBlogPost(blog.title, blog.date, blog.summary);
-            setUpEdit(blogPost);
-            setUpDelete(blogPost);
-            replaceInTable(blogPost, index);
         }
+        updateBlogHolder();
         //remove dialog
         dialog.close(false);
         dialog.parentNode.removeChild(dialog);
@@ -88,25 +70,9 @@ const setUpSave = (dialog, oldPost = undefined) => {
     });
 };
 
-//Item must be a DOM node
-const addToTable = (item) => {
-    let blogTableRow = createTableRow();
-    let blogTableRowTD = blogTableRow.querySelector('td');
-    let table = document.getElementById('blogs');
-
-    blogTableRowTD.appendChild(item);
-    table.appendChild(blogTableRow);
-};
-
-//replaces row data at specified index with item given
-const replaceInTable = (item, index) => {
-    let blogTableRowTD = document.createElement('td');
-    let table = document.getElementById('blogs');
-    let tableRows = table.querySelectorAll('tr');
-
-    blogTableRowTD.appendChild(item);
-    tableRows[index].innerHTML = '';//remove innards
-    tableRows[index].appendChild(blogTableRowTD);
+const addToBlogHolder = (item) => {
+    let blogHolder = document.getElementById('blogs');
+    blogHolder.appendChild(item);
 };
 
 //sets up the edit button for the given blog post element
@@ -125,6 +91,7 @@ const setUpEdit = (blogPostEl) => {
         setUpSave(blogDialog, oldPost);
         document.body.appendChild(blogDialog);
         blogDialog.showModal();
+        //update local storage
         window.localStorage.setItem('blogs', JSON.stringify(blogsArr));
     });
 };
@@ -146,8 +113,6 @@ const setUpDelete = (blogPostEl) => {
         });
         if(index >= 0){
             delete blogsArr[index];
-            removeFromTable(toDelete);
-            blogsArrLength--;
             //delete from local storage
             if(blogsArrLength == 0){
                 let emptyMessage = document.getElementById('empty-message');
@@ -157,22 +122,7 @@ const setUpDelete = (blogPostEl) => {
             else {
                 window.localStorage.setItem('blogs', JSON.stringify(blogsArr));
             }
-        }
-    });
-};
-
-//finds and removes the table rows corresponding to post object given
-//if duplicate of same post, will all be deleted
-const removeFromTable = (postObj) => {
-    let table = document.getElementById('blogs');
-    let rows = table.querySelectorAll('tr');
-    console.log(rows);
-    
-    rows.forEach((row) => {
-        if(row.textContent.includes(postObj.title) &&
-            row.innerText.includes(postObj.date) &&
-            row.innerText.includes(postObj.summary)) {
-                row.parentNode.removeChild(row);
+            updateBlogHolder();
         }
     });
 };
@@ -192,18 +142,26 @@ document.addEventListener('DOMContentLoaded', () => {
         window.localStorage.setItem('blogs', JSON.stringify(blogsArr));
     }
 
+    updateBlogHolder();
+});
+
+//populate blog holder
+const updateBlogHolder = () => {
     //create blog post elements from blogs in array
+    let blogHolder = document.getElementById('blogs');
+    blogHolder.innerHTML = '';
     let blogPostEls = []
+    blogsArrLength = 0;
     blogsArr.forEach(post => {
         if(post) {
             let blogPostEl = createBlogPost(post.title, post.date, post.summary);
             setUpEdit(blogPostEl);
             setUpDelete(blogPostEl);
-            blogsArrLength++;
             blogPostEls.push(blogPostEl);
+            blogsArrLength++;
         }
     });
 
-    //place blog post elements in table
-    blogPostEls.forEach(postEl => addToTable(postEl));
-});
+    //place blog post elements in blog holder 
+    blogPostEls.forEach(postEl => addToBlogHolder(postEl));
+};
