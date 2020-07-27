@@ -2,7 +2,7 @@ import {createBlogDialog, createBlogPost} from './blog.js';
 
 //will add listeners from crud.html in here
 var blogsArr;
-var blogsArrLength;
+var blogsArrLength; //used because array length lies when using delete
 
 const tableRowTemplate = document.createElement('template');
 tableRowTemplate.innerHTML =    `<tr><td></td></tr>`;
@@ -13,7 +13,7 @@ const createTableRow = () => {
                             .cloneNode(true);
 };
 
-//calls setUpAddButton
+//sets up add button listener
 const setUpAddButton = () => {
     let addButton = document.getElementById('add-button');
     addButton.addEventListener('click', () => {
@@ -25,6 +25,7 @@ const setUpAddButton = () => {
     });
 };
 
+//sets up the cancel button listener for the dialog given
 const setUpCancel = (dialog) => {
     let cancelButton = dialog.querySelector('#cancel');
     cancelButton.addEventListener('click', () => {
@@ -34,6 +35,7 @@ const setUpCancel = (dialog) => {
     });
 };
 
+//sets up the save button for the dialog given. oldPost is used when editing.
 const setUpSave = (dialog, oldPost = undefined) => {
     let saveButton = dialog.querySelector('#save');
     saveButton.addEventListener('click', () => {
@@ -47,12 +49,10 @@ const setUpSave = (dialog, oldPost = undefined) => {
 
         //create blog object
         let blog = {title: titleString, date: dateString, summary: summaryString};
-        if(!oldPost)
+        if(!oldPost) //new post
         {
             //add blog object to array
             blogsArr.push(blog);
-
-            //add blog object to local storage
 
             //place blog post to table
             let blogPost = createBlogPost(blog.title, blog.date, blog.summary);
@@ -83,7 +83,7 @@ const setUpSave = (dialog, oldPost = undefined) => {
         dialog.close(false);
         dialog.parentNode.removeChild(dialog);
 
-        //add to local storage
+        //update local storage
         window.localStorage.setItem('blogs', JSON.stringify(blogsArr));
     });
 };
@@ -98,6 +98,7 @@ const addToTable = (item) => {
     table.appendChild(blogTableRow);
 };
 
+//replaces row data at specified index with item given
 const replaceInTable = (item, index) => {
     let blogTableRowTD = document.createElement('td');
     let table = document.getElementById('blogs');
@@ -108,6 +109,7 @@ const replaceInTable = (item, index) => {
     tableRows[index].appendChild(blogTableRowTD);
 };
 
+//sets up the edit button for the given blog post element
 const setUpEdit = (blogPostEl) => {
     let buttonEls = blogPostEl.querySelectorAll('button');
     let editButtonEl = buttonEls[0];
@@ -127,6 +129,7 @@ const setUpEdit = (blogPostEl) => {
     });
 };
 
+//sets up the delete button for the given blog post element
 const setUpDelete = (blogPostEl) => {
     let buttonEls = blogPostEl.querySelectorAll('button');
     let deleteButtonEl = buttonEls[1];
@@ -158,6 +161,8 @@ const setUpDelete = (blogPostEl) => {
     });
 };
 
+//finds and removes the table rows corresponding to post object given
+//if duplicate of same post, will all be deleted
 const removeFromTable = (postObj) => {
     let table = document.getElementById('blogs');
     let rows = table.querySelectorAll('tr');
@@ -180,14 +185,14 @@ document.addEventListener('DOMContentLoaded', () => {
     blogsArr = JSON.parse(window.localStorage.getItem('blogs'));
     blogsArrLength = 0;
 
+    //if deleted everything, start with some initial blogs
     if(!blogsArr){
-        //add initial array values to local storage
         blogsArr = [{title: 'Initial1', date: '1914-11-12', summary: 'Summary1'},
                         {title: 'Initial2', date: '1914-11-12', summary: 'Summary2'}];
         window.localStorage.setItem('blogs', JSON.stringify(blogsArr));
     }
 
-    //read array
+    //create blog post elements from blogs in array
     let blogPostEls = []
     blogsArr.forEach(post => {
         if(post) {
@@ -199,6 +204,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    //place array elements into table
+    //place blog post elements in table
     blogPostEls.forEach(postEl => addToTable(postEl));
 });
