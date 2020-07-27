@@ -57,7 +57,7 @@ const setUpSave = (dialog, oldPost = undefined) => {
             //place blog post to table
             let blogPost = createBlogPost(blog.title, blog.date, blog.summary);
             setUpEdit(blogPost);
-            //TODO setup delete
+            setUpDelete(blogPost);
             addToTable(blogPost);
         }
         else //editing
@@ -71,7 +71,7 @@ const setUpSave = (dialog, oldPost = undefined) => {
             blogsArr[index] = blog;
             let blogPost = createBlogPost(blog.title, blog.date, blog.summary);
             setUpEdit(blogPost);
-            //TODO setup delete
+            setUpDelete(blogPost);
             replaceInTable(blogPost, index);
         }
         //remove dialog
@@ -118,6 +118,42 @@ const setUpEdit = (blogPostEl) => {
     });
 };
 
+const setUpDelete = (blogPostEl) => {
+    let buttonEls = blogPostEl.querySelectorAll('button');
+    let deleteButtonEl = buttonEls[1];
+    let postTitle = blogPostEl.querySelector('.blog-title').innerText;
+    let postDate = blogPostEl.querySelector('.blog-date').innerText;
+    let postSummary = blogPostEl.querySelector('.blog-summary').innerText;
+    let toDelete = {title: postTitle, date: postDate, summary: postSummary};
+
+    deleteButtonEl.addEventListener('click', () => {
+        let index = blogsArr.findIndex((oldPost) => {
+            return (oldPost && toDelete.title === oldPost.title &&
+                    toDelete.date === oldPost.date &&
+                    toDelete.summary === oldPost.summary);
+        });
+        if(index >= 0){
+            delete blogsArr[index];
+            removeFromTable(toDelete);
+        }
+        //delete from local storage
+    });
+};
+
+const removeFromTable = (postObj) => {
+    let table = document.getElementById('blogs');
+    let rows = table.querySelectorAll('tr');
+    console.log(rows);
+    
+    rows.forEach((row) => {
+        if(row.textContent.includes(postObj.title) &&
+            row.innerText.includes(postObj.date) &&
+            row.innerText.includes(postObj.summary)) {
+                row.parentNode.removeChild(row);
+        }
+    });
+};
+
 //Wire up elements here
 document.addEventListener('DOMContentLoaded', () => {
     setUpAddButton();
@@ -128,19 +164,8 @@ document.addEventListener('DOMContentLoaded', () => {
     let blogPostEls = blogsArr.map((post) => {
         let blogPostEl = createBlogPost(post.title, post.date, post.summary);
         let buttonEls = blogPostEl.querySelectorAll('button');
-        //add listener to edit button
         setUpEdit(blogPostEl);
-
-        //add listener to delete button
-        let deleteButtonEl = buttonEls[1];
-        deleteButtonEl.addEventListener('click', () => {
-            console.log(`delete button clicked on ${post.title}`);
-            //delete from array
-
-            //delete from local storage
-
-            //remove from table
-        });
+        setUpDelete(blogPostEl);
 
         return blogPostEl;
     });
