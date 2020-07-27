@@ -113,6 +113,7 @@ const setUpDelete = (blogPostEl) => {
         });
         if(index >= 0){
             delete blogsArr[index];
+            blogsArrLength--;
             //delete from local storage
             if(blogsArrLength == 0){
                 let emptyMessage = document.getElementById('empty-message');
