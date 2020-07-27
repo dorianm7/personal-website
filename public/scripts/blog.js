@@ -18,8 +18,8 @@ blogPostTemplate.innerHTML =    `<div class="blog-post">
                                     <p class="blog-title"></p>
                                     <time class="blog-date"></time>
                                     <p class="blog-summary"></p>
-                                    <button class="blog-button">Edit</button>
-                                    <button class="blog-button">Delete</button>
+                                    <button class="blog-button"><img src="./images/pencil.png"></img>Edit</button>
+                                    <button class="blog-button"><img src="./images/delete.png"> Delete</button>
                                 </div>`;
 
 const createBlogDialog = (title = '', date = '', summary = '') => {
