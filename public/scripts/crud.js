@@ -1,8 +1,8 @@
 import {createBlogDialog, createBlogPost} from './blog.js';
 
 //will add listeners from crud.html in here
-var blogsArr = [{title: 'Title1', date: '1914-11-12', summary: 'Summary1'},
-            {title: 'Title2', date: '1914-11-12', summary: 'Summary2'}];
+var blogsArr;
+var blogsArrLength;
 
 const tableRowTemplate = document.createElement('template');
 tableRowTemplate.innerHTML =    `<tr><td></td></tr>`;
@@ -59,6 +59,11 @@ const setUpSave = (dialog, oldPost = undefined) => {
             setUpEdit(blogPost);
             setUpDelete(blogPost);
             addToTable(blogPost);
+            blogsArrLength++;
+
+            //remove empty message
+            let message = document.getElementById('empty-message');
+            message.classList.add('hide');
         }
         else //editing
         {
@@ -77,6 +82,9 @@ const setUpSave = (dialog, oldPost = undefined) => {
         //remove dialog
         dialog.close(false);
         dialog.parentNode.removeChild(dialog);
+
+        //add to local storage
+        window.localStorage.setItem('blogs', JSON.stringify(blogsArr));
     });
 };
 
@@ -115,6 +123,7 @@ const setUpEdit = (blogPostEl) => {
         setUpSave(blogDialog, oldPost);
         document.body.appendChild(blogDialog);
         blogDialog.showModal();
+        window.localStorage.setItem('blogs', JSON.stringify(blogsArr));
     });
 };
 
@@ -135,8 +144,17 @@ const setUpDelete = (blogPostEl) => {
         if(index >= 0){
             delete blogsArr[index];
             removeFromTable(toDelete);
+            blogsArrLength--;
+            //delete from local storage
+            if(blogsArrLength == 0){
+                let emptyMessage = document.getElementById('empty-message');
+                emptyMessage.classList.remove('hide');
+                window.localStorage.removeItem('blogs');
+            }
+            else {
+                window.localStorage.setItem('blogs', JSON.stringify(blogsArr));
+            }
         }
-        //delete from local storage
     });
 };
 
@@ -159,16 +177,28 @@ document.addEventListener('DOMContentLoaded', () => {
     setUpAddButton();
 
     //read from local storage, place into array
+    blogsArr = JSON.parse(window.localStorage.getItem('blogs'));
+    blogsArrLength = 0;
+
+    if(!blogsArr){
+        //add initial array values to local storage
+        blogsArr = [{title: 'Initial1', date: '1914-11-12', summary: 'Summary1'},
+                        {title: 'Initial2', date: '1914-11-12', summary: 'Summary2'}];
+        window.localStorage.setItem('blogs', JSON.stringify(blogsArr));
+    }
 
     //read array
-    let blogPostEls = blogsArr.map((post) => {
-        let blogPostEl = createBlogPost(post.title, post.date, post.summary);
-        let buttonEls = blogPostEl.querySelectorAll('button');
-        setUpEdit(blogPostEl);
-        setUpDelete(blogPostEl);
-
-        return blogPostEl;
+    let blogPostEls = []
+    blogsArr.forEach(post => {
+        if(post) {
+            let blogPostEl = createBlogPost(post.title, post.date, post.summary);
+            setUpEdit(blogPostEl);
+            setUpDelete(blogPostEl);
+            blogsArrLength++;
+            blogPostEls.push(blogPostEl);
+        }
     });
+
     //place array elements into table
     blogPostEls.forEach(postEl => addToTable(postEl));
 });
