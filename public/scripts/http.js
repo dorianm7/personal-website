@@ -11,47 +11,45 @@ const getFormData = () => {
     let articleName = formEl.querySelector('#article-name').value;
     let articleBody = formEl.querySelector('#article-body').value;
     let submitType = formEl.querySelector('input[name="submit-type"]:checked').value;
+    let date = new Date();
 
     return {id:id, 
             articleName: articleName, 
             articleBody: articleBody, 
-            submitType: submitType}; 
+            submitType: submitType,
+            date: date}; 
 };
 
 const handle = (event) => {
     let output = document.getElementById('response');
     let data = getFormData();
-    let date = new Date();
+    let method;
+    let action;
 
     //check the button value
     switch(event.target.value){
-        default:
-        console.log(event.target.value);
-        console.log(data.id, data.articleName, data.articleBody, data.submitType);
-    //  Post:
-    //      action = 'https://httpbin.org/post'
-    //      method = 'post' 
-    //      break;
-    //  Get:
-    //      action = 'https://httpbin.org/get'
-    //      method = 'get'
-    //      break;
-    //  Put:
-    //      action = 'https://httpbin.org/put'
-    //      method = 'put' 
-    //      break;
-    //  Delete:
-    //      action = 'https://httpbin.org/delete'
-    //      method = 'delete' 
-    //      break;
+        case 'Post':
+            method = 'post' 
+            break;
+        case 'Get':
+            method = 'get'
+            break;
+        case 'Put':
+            method = 'put' 
+            break;
+        case 'Delete':
+            method = 'delete' 
+            break;
     }
+    action = `https://httpbin.org/${method}`;
 
     if(data['submitType'] === 'XMLHttpRequest'){
-    //  XMLHttpRequest open ()
-    //  XMLHttpRequest send ()
-    //  response = 
-    //  output.value = response
-        output.value = data['submitType'];
+        let xhr = new XMLHttpRequest();
+        xhr.open(method, action, true);
+        xhr.onload = () => {
+            output.value = xhr.responseText;
+        };
+        xhr.send (JSON.stringify(data));
     } else {
     //  Fetch send ()
     //  response = 
