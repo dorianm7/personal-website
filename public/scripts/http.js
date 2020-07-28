@@ -56,13 +56,11 @@ const handle = (event) => {
         };
         xhr.send (JSON.stringify(data));
     } else {
-        fetchFunction(data);
+        fetchFunction(data, method, action);
     }
 };
 
-const postFetch = (data) => {
-    //know the method
-    //know the action
+const postFetch = (data, method, action) => {
     //options = { method: 'POST',
     //            headers: {
     //              'Content-Type': 'application/json'
@@ -74,26 +72,19 @@ const postFetch = (data) => {
     console.log('Fetched using POST');
 };
 
-const getFetch = (data) => {
-    //we know the method
-    //we know the action
- 
+const getFetch = (data, method, action) => {
     //fetch(action)
     console.log('Fetched using GET');
 };
 
-const putFetch = (data) => {
-    //know the method
-    //know the action
+const putFetch = (data, method, action) => {
     //options = 
 
     //fetch(action, options)
     console.log('Fetched using PUT');
 };
 
-const deleteFetch = (data) => {
-    //know the method
-    //know the action
+const deleteFetch = (data, method, action) => {
     //options = 
 
     //fetch(action, options)
