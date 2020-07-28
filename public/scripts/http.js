@@ -25,20 +25,25 @@ const handle = (event) => {
     let data = getFormData();
     let method;
     let action;
+    let fetchFunction;
 
     //check the button value
     switch(event.target.value){
         case 'Post':
-            method = 'post' 
+            method = 'post';
+            fetchFunction = postFetch;
             break;
         case 'Get':
-            method = 'get'
+            method = 'get';
+            fetchFunction = getFetch;
             break;
         case 'Put':
-            method = 'put' 
+            method = 'put'; 
+            fetchFunction = putFetch;
             break;
         case 'Delete':
-            method = 'delete' 
+            method = 'delete'; 
+            fetchFunction = deleteFetch;
             break;
     }
     action = `https://httpbin.org/${method}`;
@@ -51,12 +56,49 @@ const handle = (event) => {
         };
         xhr.send (JSON.stringify(data));
     } else {
-    //  Fetch send ()
-    //  response = 
-    //  output.value = response
-        output.value = data['submitType'];
+        fetchFunction(data);
     }
 };
+
+const postFetch = (data) => {
+    //know the method
+    //know the action
+    //options = { method: 'POST',
+    //            headers: {
+    //              'Content-Type': 'application/json'
+    //                     },
+    //            body: JSON.stringify(data)
+    //          };
+ 
+    //fetch(action, options)
+    console.log('Fetched using POST');
+};
+
+const getFetch = (data) => {
+    //we know the method
+    //we know the action
+ 
+    //fetch(action)
+    console.log('Fetched using GET');
+};
+
+const putFetch = (data) => {
+    //know the method
+    //know the action
+    //options = 
+
+    //fetch(action, options)
+    console.log('Fetched using PUT');
+};
+
+const deleteFetch = (data) => {
+    //know the method
+    //know the action
+    //options = 
+
+    //fetch(action, options)
+    console.log('Fetched using DELETE');
+}
 
 //set up
 window.addEventListener('DOMContentLoaded', () => {
