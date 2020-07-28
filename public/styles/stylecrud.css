@@ -1,0 +1,57 @@
+p {
+    font-size: var(--main-web-font-size);
+    word-wrap: break-word;
+}
+
+.blog-post {
+    border: .5vw solid var(--header-color);
+    text-align: center;
+    padding: 20px;
+    word-wrap: break-word;
+    height: inherit;
+    width: 30%;
+    margin: 20px;
+}
+
+.blog-title {
+    transform: rotate(-4deg);
+    font-family: 'Caveat', cursive; 
+    margin: 0 auto;
+    font-size: 3em;
+}
+
+.blog-button {
+    margin-top: 20px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+dialog {
+}
+
+dialog > form {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+dialog > form label {
+    width: 100%;
+    display: block;
+    text-align: left;
+    font-family: 'Caveat', cursive; 
+    margin-top: 1em;
+    font-size: 1.25em;
+}
+
+dialog > form input {
+    width: 100%;
+    padding: .5em 0 .5em .5em; 
+}
+
+#blogs {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
