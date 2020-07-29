@@ -66,14 +66,15 @@ const handle = (event) => {
 };
 
 const postFetch = (data, method, action) => {
-    //options = { method: 'POST',
-    //            headers: {
-    //              'Content-Type': 'application/json'
-    //                     },
-    //            body: JSON.stringify(data)
-    //          };
+    delete data.submitType;//not part of info needed
+    let options = { method: method,
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                };
  
-    //fetch(action, options)
+    return fetch(action, options)
     console.log('Fetched using POST');
 };
 
