@@ -300,35 +300,29 @@ footer p {
     transition: background-color .3s 0s;
 }
 
-.dropdown {
-
+.dropdown .menu {
+    margin-top: var(--navbar-submenu-margin-top);
+    padding: 0;
+    margin-left: 0;
+    position: absolute;
 }
-    .dropdown .menu {
-        margin-top: var(--navbar-submenu-margin-top);
-        padding: 0;
-        margin-left: 0;
-        position: absolute;
-    }
 
-    .dropdown .menu-item {
-        display: none;
-        margin: var(--navbar-menu-item-padding) 0;
-    }
-
-    .dropdown a:hover {
-        background-color: var(--dropdown-menu-hover-color);
-    }
-
-.dropdown:hover {
-
+.dropdown .menu-item {
+    display: none;
+    margin: var(--navbar-menu-item-padding) 0;
 }
-    .dropdown:hover .menu {
-        background-color: var(--dropdown-menu-color);
-    }
 
-    .dropdown:hover .menu-item{
-        display: block;
-    }
+.dropdown a:hover {
+    background-color: var(--dropdown-menu-hover-color);
+}
+
+.dropdown:hover .menu {
+    background-color: var(--dropdown-menu-color);
+}
+
+.dropdown:hover .menu-item{
+    display: block;
+}
 
 .preview-card {
     width: 30%;
@@ -378,11 +372,6 @@ footer p {
     #nav-menu > .menu-item > a:hover,
     #nav-menu > .menu-item:hover > a {
         background-color: var(--navbar-menu-item-hover-color);
-    }
-
-    #nav-menu > .menu-item > a {
-        /* background-color: blanchedalmond; */
-        /* placeholder*/
     }
 
 /* bigger screen sizes*/
@@ -437,16 +426,12 @@ footer p {
     margin: 3% 0;
 }
 
-#about {
+#about, hr {
     margin-top: 0;
 }
 
 #contact {
     margin-bottom: 0;
-}
-
-hr {
-    margin-top: 0;
 }
 
 #contact-card {
