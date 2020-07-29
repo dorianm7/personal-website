@@ -67,12 +67,13 @@ const handle = (event) => {
 
 const postFetch = (data, method, action) => {
     delete data.submitType;//not part of info needed
-    let options = { method: method,
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                };
+    let options = { 
+        method: method,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    };
  
     return fetch(action, options)
     console.log('Fetched using POST');
@@ -88,9 +89,16 @@ const getFetch = (data, method, action) => {
 };
 
 const putFetch = (data, method, action) => {
-    //options = 
+    delete data.submitType;
+    let options = {
+        method: method,
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    };
 
-    //fetch(action, options)
+    return fetch(action, options)
     console.log('Fetched using PUT');
 };
 
