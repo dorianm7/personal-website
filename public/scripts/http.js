@@ -26,23 +26,29 @@ const handle = (event) => {
     let method;
     let action;
     let fetchFunction;
+    let xhr = new XMLHttpRequest();
+    let openSendXHRFunction;
 
     //check the button value
     switch(event.target.value){
         case 'Post':
             method = 'post';
+            openSendXHRFunction = openSendPostPutXHR;
             fetchFunction = postFetch;
             break;
         case 'Get':
             method = 'get';
+            openSendXHRFunction = openSendGetXHR;
             fetchFunction = getFetch;
             break;
         case 'Put':
             method = 'put';
+            openSendXHRFunction = openSendPostPutXHR;
             fetchFunction = putFetch;
             break;
         case 'Delete':
             method = 'delete'; 
+            openSendXHRFunction = openSendDeleteXHR;
             fetchFunction = deleteFetch;
             break;
     }
@@ -50,11 +56,10 @@ const handle = (event) => {
 
     if(data['submitType'] === 'XMLHttpRequest'){
         let xhr = new XMLHttpRequest();
-        xhr.open(method, action, true);
         xhr.onload = () => {
             output.value = xhr.responseText;
         };
-        xhr.send (JSON.stringify(data));
+        openSendXHRFunction(xhr, data, method, action);
     } else {
         fetchFunction(data, method, action)
             .then(response => response.json())
@@ -75,21 +80,18 @@ const postFetch = (data, method, action) => {
         body: JSON.stringify(data)
     };
  
-    return fetch(action, options)
-    console.log('Fetched using POST');
+    return fetch(action, options);
 };
 
 const getFetch = (data, method, action) => {
-    //fetch(action)
     let validUri = getActionURL(action, data); 
     return fetch(validUri, {
         method: method
-    })
-    console.log('Fetched using GET');
+    });
 };
 
 const putFetch = (data, method, action) => {
-    delete data.submitType;
+    delete data.submitType;//not part of info needed
     let options = {
         method: method,
         headers: {
@@ -98,8 +100,7 @@ const putFetch = (data, method, action) => {
         body: JSON.stringify(data)
     };
 
-    return fetch(action, options)
-    console.log('Fetched using PUT');
+    return fetch(action, options);
 };
 
 //assuming backend is only expecting the id the resource to delete
@@ -107,11 +108,28 @@ const deleteFetch = (data, method, action) => {
     return fetch(`${action}?id=${data.id}`, {
         method: method
     });
-    console.log('Fetched using DELETE');
 }
 
+const openSendPostPutXHR = (xhr, data, method, action) => {
+    delete data.submitType;
+    xhr.open(method, action, true);
+    xhr.send(JSON.stringify(data));
+};
+
+const openSendGetXHR = (xhr, data, method, action) => {
+    let validUri = getActionURL(action, data);
+    xhr.open(method, validUri, true);
+    xhr.send();
+};
+
+//Assuming backend is only expecting the id of the resource to delete
+const openSendDeleteXHR = (xhr, data, method, action) => {
+    xhr.open(method, `${action}?id=${data.id}`, true);
+    xhr.send();
+};
+
 const getActionURL = (action, obj) => {
-    return encodeURI(`${action}?id=${obj.id}&name=${obj.articleName}&body=${obj.articleBody}&date=${obj.date}`);
+    return encodeURI(`${action}?id=${obj.id}&articleName=${obj.articleName}&articleBody=${obj.articleBody}&date=${obj.date}`);
 };
 
 //set up
