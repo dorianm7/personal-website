@@ -57,16 +57,16 @@ const handle = (event) => {
     if(data['submitType'] === 'XMLHttpRequest'){
         let xhr = new XMLHttpRequest();
         xhr.onload = () => {
-            output.value = xhr.responseText;
+            output.value = JSON.stringify(JSON.parse(xhr.responseText), undefined, 4);
         };
         openSendXHRFunction(xhr, data, method, action);
     } else {
         fetchFunction(data, method, action)
-            .then(response => response.json())
-            .then(responseData => {
-                output.value = JSON.stringify(responseData);
-            })
-            .catch(e => {console.log(e);});
+        .then(response => response.json())
+        .then(responseData => {
+            output.value = JSON.stringify(responseData, undefined, 4);
+        })
+        .catch(e => {console.log(e);});
     }
 };
 
