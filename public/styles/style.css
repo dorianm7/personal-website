@@ -15,6 +15,7 @@
     --accent-color-lighter: hsl(var(--accent-color-hue), var(--accent-color-saturation), calc(var(--accent-color-lightness) + 25%));
     --accent-color-dark: hsl(var(--accent-color-hue), var(--accent-color-saturation), calc(var(--accent-color-lightness) - 15%));
     --accent-color-darker: hsl(var(--accent-color-hue), var(--accent-color-saturation), calc(var(--accent-color-lightness) - 25%));
+    --accent-color-darkest: hsl(var(--accent-color-hue), var(--accent-color-saturation), calc(var(--accent-color-lightness) - 30%));
     --header-color: var(--accent-color);
     --navbar-color: var(--accent-color); 
     --navbar-menu-item-hover-color: var(--accent-color-dark); 
@@ -239,6 +240,12 @@ a {
 
 h1, h2 {
     display: inline-block;
+    margin-top: 0;
+}
+
+h1 {
+    margin-left: 1%;
+    margin-top: 1%;
 }
 
 h1, h2, h3 {
@@ -341,14 +348,14 @@ footer p {
     margin-top: .5em;
     text-decoration: none;
     color: white;
-    background-color: var(--accent-color-dark);
+    background-color: var(--accent-color-darker);
     box-shadow: var(--button-like-unactive-shadow); 
     font-size: var(--main-web-font-size);
     border: none;
 }
 
 .button-like:active {
-    background-color: var(--accent-color-darker);
+    background-color: var(--accent-color-darkest);
     box-shadow: var(--button-like-active-shadow);
 }
 
