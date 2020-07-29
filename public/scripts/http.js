@@ -83,7 +83,7 @@ const getFetch = (data, method, action) => {
     //fetch(action)
     let validUri = getActionURL(action, data); 
     return fetch(validUri, {
-        method: method,
+        method: method
     })
     console.log('Fetched using GET');
 };
@@ -102,10 +102,11 @@ const putFetch = (data, method, action) => {
     console.log('Fetched using PUT');
 };
 
+//assuming backend is only expecting the id the resource to delete
 const deleteFetch = (data, method, action) => {
-    //options = 
-
-    //fetch(action, options)
+    return fetch(`${action}?id=${data.id}`, {
+        method: method
+    });
     console.log('Fetched using DELETE');
 }
 
