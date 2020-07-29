@@ -34,7 +34,7 @@ const handle = (event) => {
         case 'Post':
             method = 'post';
             openSendXHRFunction = openSendPostPutXHR;
-            fetchFunction = postFetch;
+            fetchFunction = postPutFetch;
             break;
         case 'Get':
             method = 'get';
@@ -44,7 +44,7 @@ const handle = (event) => {
         case 'Put':
             method = 'put';
             openSendXHRFunction = openSendPostPutXHR;
-            fetchFunction = putFetch;
+            fetchFunction = postPutFetch;
             break;
         case 'Delete':
             method = 'delete'; 
@@ -70,28 +70,8 @@ const handle = (event) => {
     }
 };
 
-const postFetch = (data, method, action) => {
-    delete data.submitType;//not part of info needed
-    let options = { 
-        method: method,
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    };
- 
-    return fetch(action, options);
-};
-
-const getFetch = (data, method, action) => {
-    let validUri = getActionURL(action, data); 
-    return fetch(validUri, {
-        method: method
-    });
-};
-
-const putFetch = (data, method, action) => {
-    delete data.submitType;//not part of info needed
+const postPutFetch = (data, method, action) => {
+    delete data.submitType; //not part of info needed
     let options = {
         method: method,
         headers: {
@@ -101,6 +81,13 @@ const putFetch = (data, method, action) => {
     };
 
     return fetch(action, options);
+}
+
+const getFetch = (data, method, action) => {
+    let validUri = getActionURL(action, data); 
+    return fetch(validUri, {
+        method: method
+    });
 };
 
 //assuming backend is only expecting the id the resource to delete
@@ -113,6 +100,7 @@ const deleteFetch = (data, method, action) => {
 const openSendPostPutXHR = (xhr, data, method, action) => {
     delete data.submitType;
     xhr.open(method, action, true);
+    xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));
 };
 
@@ -129,7 +117,8 @@ const openSendDeleteXHR = (xhr, data, method, action) => {
 };
 
 const getActionURL = (action, obj) => {
-    return encodeURI(`${action}?id=${obj.id}&articleName=${obj.articleName}&articleBody=${obj.articleBody}&date=${obj.date}`);
+    return encodeURI(`${action}?id=${obj.id}&articleName=${obj.articleName}&articleBody=${obj.articleBody}&date=${obj.date}`)
+            .replaceAll('%20', '+');
 };
 
 //set up
