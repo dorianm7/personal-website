@@ -11,10 +11,10 @@
     --accent-color-saturation: 100%;
     --accent-color-lightness: 50%;
     --accent-color: hsl(var(--accent-color-hue), var(--accent-color-saturation), var(--accent-color-lightness));
-    --accent-color-light: hsl(var(--accent-color-hue), var(--accent-color-saturation), calc(var(--accent-color-lightness) + 10%));
-    --accent-color-lighter: hsl(var(--accent-color-hue), var(--accent-color-saturation), calc(var(--accent-color-lightness) + 20%));
-    --accent-color-dark: hsl(var(--accent-color-hue), var(--accent-color-saturation), calc(var(--accent-color-lightness) - 10%));
-    --accent-color-darker: hsl(var(--accent-color-hue), var(--accent-color-saturation), calc(var(--accent-color-lightness) - 20%));
+    --accent-color-light: hsl(var(--accent-color-hue), var(--accent-color-saturation), calc(var(--accent-color-lightness) + 15%));
+    --accent-color-lighter: hsl(var(--accent-color-hue), var(--accent-color-saturation), calc(var(--accent-color-lightness) + 25%));
+    --accent-color-dark: hsl(var(--accent-color-hue), var(--accent-color-saturation), calc(var(--accent-color-lightness) - 15%));
+    --accent-color-darker: hsl(var(--accent-color-hue), var(--accent-color-saturation), calc(var(--accent-color-lightness) - 25%));
     --header-color: var(--accent-color);
     --navbar-color: var(--accent-color); 
     --navbar-menu-item-hover-color: var(--accent-color-dark); 
@@ -38,6 +38,16 @@
     --phone-mobile-h1-size: calc(var(--phone-mobile-font-size) + 45px);
     --button-like-unactive-shadow: -3px 3px 5px -3px black;
     --button-like-active-shadow: -2px 2px 5px -3px black;
+}
+
+@font-face {
+    font-family: 'Caveat';
+    src: url('../fonts/caveat-regular-webfont.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'PT Sans Narrow';
+    src: url('../fonts/ptsansnarrow-regular-webfont.woff2') format('woff2');
 }
 
 html {
@@ -221,6 +231,10 @@ header {
 a {
     text-decoration: none;
     color: var(--main-color);
+}
+
+#name-home-link {
+    font-weight: bold;
 }
 
 h1, h2 {
