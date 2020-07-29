@@ -38,7 +38,7 @@ const handle = (event) => {
             fetchFunction = getFetch;
             break;
         case 'Put':
-            method = 'put'; 
+            method = 'put';
             fetchFunction = putFetch;
             break;
         case 'Delete':
@@ -56,7 +56,12 @@ const handle = (event) => {
         };
         xhr.send (JSON.stringify(data));
     } else {
-        fetchFunction(data, method, action);
+        fetchFunction(data, method, action)
+            .then(response => response.json())
+            .then(responseData => {
+                output.value = JSON.stringify(responseData);
+            })
+            .catch(e => {console.log(e);});
     }
 };
 
@@ -74,6 +79,10 @@ const postFetch = (data, method, action) => {
 
 const getFetch = (data, method, action) => {
     //fetch(action)
+    let validUri = getActionURL(action, data); 
+    return fetch(validUri, {
+        method: method,
+    })
     console.log('Fetched using GET');
 };
 
@@ -90,6 +99,10 @@ const deleteFetch = (data, method, action) => {
     //fetch(action, options)
     console.log('Fetched using DELETE');
 }
+
+const getActionURL = (action, obj) => {
+    return encodeURI(`${action}?id=${obj.id}&name=${obj.articleName}&body=${obj.articleBody}&date=${obj.date}`);
+};
 
 //set up
 window.addEventListener('DOMContentLoaded', () => {
