@@ -43,11 +43,13 @@
 
 @font-face {
     font-family: 'Caveat';
+    font-display: swap;
     src: url('../fonts/caveat-regular-webfont.woff2') format('woff2');
 }
 
 @font-face {
     font-family: 'PT Sans Narrow';
+    font-display: swap;
     src: url('../fonts/ptsansnarrow-regular-webfont.woff2') format('woff2');
 }
 
