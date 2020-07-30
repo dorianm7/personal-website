@@ -301,6 +301,7 @@ footer p {
     padding: 0;
     margin-left: 0;
     position: absolute;
+    z-index: 5;
 }
 
 .dropdown .menu-item {
@@ -331,6 +332,7 @@ footer p {
     width: 80%;
     text-align: center;
     margin: 0 auto;
+    padding-bottom: 20px;
 }
 
 .button-like {
