@@ -49,8 +49,8 @@
     src: url('../fonts/ptsansnarrow-regular-webfont.woff2') format('woff2');
 }
 
-html {
-    background-color: white;
+body, h1 {
+    margin: 0;
 }
 
 .hide {
@@ -61,7 +61,7 @@ html {
 /* smaller screen size laptop, mobile */
 /* verticalize */
 @media (max-width: 1000px) and (hover: hover), (hover: none) {
-    main {
+    html {
         text-align: center;
     }
 
@@ -75,6 +75,11 @@ html {
     .icon {
         width: 4em;
         height: 4em;
+    }
+
+    #name-home-link, 
+    .dropdown > .menu > .menu-item {
+        text-align: left;
     }
 
     #hero-container {
@@ -238,12 +243,7 @@ a {
 
 h1, h2 {
     display: inline-block;
-    margin-top: 0;
-}
-
-h1 {
-    margin-left: 1%;
-    margin-top: 1%;
+    margin-bottom: 0;
 }
 
 h1, h2, h3 {
@@ -255,13 +255,10 @@ h1, h2, h3, #name-home-link {
     font-family: 'Caveat', cursive;
 }
 
-h2 {
-    width: 100%;
-}
-
 main {
     width: 90%;
     margin: 0 auto;
+    padding: 1%;
     background-color: var(--background-color);
 }
 
@@ -273,18 +270,14 @@ section {
     margin: 1%;
 }
 
-    section p {
+    section p,
+    footer p {
         margin: 0 auto;
-        text-align: center;
     }
 
 footer {
     text-align: center;
     background-color: var(--background-color);
-}
-
-footer p {
-    margin: 0 auto;
 }
 
 .menu {
@@ -335,6 +328,15 @@ footer p {
     padding-bottom: 20px;
 }
 
+    .full-card > h2 {
+        margin-bottom: 20px;
+    }
+
+    .full-card > h2 + * {
+        display: block;
+        margin: 0 auto;
+    }
+
 .button-like {
     border-radius: 5px;
     padding: .3em;
@@ -378,15 +380,20 @@ footer p {
     #hero-container {
         display: flex;
         flex-direction: row;
-        margin-right: 10%;
         height: 22em;
     }
 
         #hero-container img {
             width: 20em;
             height: 20em;
-            margin: auto 0;
+            margin: auto auto 0 0;
+            margin-left: 5%;
         }
+
+    #hero-info {
+        margin: auto 0 auto auto;
+        margin-right:5%;
+    }
         
     .card-holder {
         display: flex;
@@ -408,14 +415,14 @@ footer p {
 
 }
 
-#hero-info {
+#hero-info,
+section p {
     text-align: center;
-    margin: auto 10%;
 }
 
     #hero-info > p {
-        padding: 1em 0;
-        border: 1px solid black;
+        padding: 1em .5em;
+        border: 2px solid black;
         background-color: rgba(255, 255, 255, .8);
         margin: 0 0;
     }
