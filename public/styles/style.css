@@ -1,4 +1,5 @@
 :root {
+    --background-color: white;
     --main-color-hue: 0;
     --main-color-saturation: 100%;
     --main-color-lightness: 0%;
@@ -15,11 +16,16 @@
     --header-color: var(--accent-color);
     --navbar-color: var(--accent-color); 
     --navbar-menu-item-hover-color: var(--accent-color-dark); 
-    --background-color: white;
     --navbar-menu-item-padding: 5px;
     --navbar-submenu-margin-top: calc(var(--navbar-menu-item-padding) - 1px);
+    --navbar-submenu-padding-bottom: calc(var(--navbar-submenu-margin-top) - 1px);
     --dropdown-menu-color: var(--navbar-menu-item-hover-color);
     --dropdown-menu-hover-color: var(--accent-color-darker); 
+    --dropdown-small-menu-item-width: 185px;
+    --dropdown-small-menu-item-padding-left: var(--navbar-menu-item-padding);
+    --dropdown-small-menu-item-hover-width: calc(var(--dropdown-small-menu-item-width) - var(--dropdown-small-menu-item-padding-left)); 
+    --dropdown-big-menu-item-width: 230px;
+    --dropdown-big-menu-item-hover-width: calc(var(--dropdown-big-menu-item-width) - var(--navbar-menu-item-padding));
     --main-web-font-size: 25px;
     --main-web-nav-font-size: calc(var(--main-web-font-size) + 5px);
     --main-web-h4-size: calc(var(--main-web-font-size) + 15px);
@@ -110,6 +116,17 @@ body, h1 {
         display: flex; 
         flex-direction: column;
         align-items: center;
+    }
+
+    .dropdown:hover .menu-item{
+        width: var(--dropdown-small-menu-item-width) !important;
+    }
+
+    .dropdown:hover .menu-item a {
+        width: var(--dropdown-small-menu-item-hover-width) !important;
+        padding-left: var(--dropdown-small-menu-item-padding-left) !important;
+
+        padding-bottom: 0 !important;
     }
 }
 
@@ -312,6 +329,18 @@ footer {
 
 .dropdown:hover .menu-item{
     display: block;
+    position: relative;
+    width: var(--dropdown-big-menu-item-width);
+    height:1em;
+    margin-top:0;
+}
+
+.dropdown:hover .menu-item a {
+    position:absolute;
+    width: var(--dropdown-big-menu-item-hover-width);
+    margin:0;
+    padding:0;
+    padding-left: var(--navbar-menu-item-padding);
 }
 
 .preview-card {
@@ -413,6 +442,9 @@ footer {
         padding-right: 10px;
     }
 
+    .dropdown:hover .menu {
+        padding-bottom: var(--navbar-submenu-padding-bottom);
+    }
 }
 
 #hero-info,
