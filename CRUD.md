@@ -9,4 +9,5 @@ After many hours I have a working log in page that will move you to and from blo
 Status report 7/31/20 3:00am:
 Able to read from the database and place blogposts into blogedit.html. For points, the next step is to add a blogs section on my website to place those blog posts.
 
-
+Status report 7/31/20 3:46am:
+Able to add blog posts to index. Now can try to connect the edit and delete buttons.
