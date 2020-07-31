@@ -26,7 +26,7 @@ const handle = (event) => {
     let method;
     let action;
     let fetchFunction;
-    let xhr = new XMLHttpRequest();
+    let xhr;
     let openSendXHRFunction;
 
     //check the button value
@@ -55,7 +55,7 @@ const handle = (event) => {
     action = `https://httpbin.org/${method}`;
 
     if(data['submitType'] === 'XMLHttpRequest'){
-        let xhr = new XMLHttpRequest();
+        xhr = new XMLHttpRequest();
         xhr.onload = () => {
             output.value = JSON.stringify(JSON.parse(xhr.responseText), undefined, 4);
         };
