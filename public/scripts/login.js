@@ -1,27 +1,11 @@
-var firebaseConfig = {
-    apiKey: "AIzaSyBMY9iaR4u74g6x0i_XeoFbEJfUDLpManM",
-    authDomain: "cse134b-hw5-f0af8.firebaseapp.com",
-    databaseURL: "https://cse134b-hw5-f0af8.firebaseio.com",
-    projectId: "cse134b-hw5-f0af8",
-    storageBucket: "cse134b-hw5-f0af8.appspot.com",
-    messagingSenderId: "337467895487",
-    appId: "1:337467895487:web:276909736d9eef43aea00a"
-};
-
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
-
-firebase.auth();
-
-var ui = new firebaseui.auth.AuthUI(firebase.auth());
+import {auth} from './firebase-init.js';
 
 var uiConfig = {
     callbacks: {
         signInSuccessWithAuthResult: function(authResult, redirectUrl) {
             //Successfully signed in
-            //return type determines whether we continue the redirect automatically
-            // or whether we leave that developer to handle
-            return true;
+            //return type redirect automatically or you handle
+            return false;
         },
         uiShown: function() {
             //Widget is rendered. Hide the loader
@@ -38,4 +22,25 @@ var uiConfig = {
     privacyPolicyUrl: '../index.html' //no Privacy policy url
 };
 
-ui.start('#firebaseui-auth-container', uiConfig);
+//Move user from Login to Blog-Edit page if signed in and vice-versa 
+auth.onAuthStateChanged(function(user) {
+    if(window.location.href.includes('login.html')) {
+        if(user) {
+            window.location.href = '../blogedit.html';
+        }
+        else {
+            let ui = new firebaseui.auth.AuthUI(auth);
+            ui.start('#firebaseui-auth-container', uiConfig);
+        }
+    }
+
+    if(window.location.href.includes('blogedit.html')) {
+        if(!user) {
+            alert('Access denied');
+            window.location.href = '../login.html';
+        }
+        else{
+            document.querySelector('body').style.display = '';
+        }
+    }
+});
