@@ -11,3 +11,6 @@ Able to read from the database and place blogposts into blogedit.html. For point
 
 Status report 7/31/20 3:46am:
 Able to add blog posts to index. Now can try to connect the edit and delete buttons.
+
+Status report 7/31/20 4:31am:
+Styled blog posts. Going to try to implement edit and delete.
