@@ -13,9 +13,9 @@ blogDialogTemplate.innerHTML =  `<dialog>
                                     </form>
                                 </dialog>`;
 
-const blogPostTemplate = document.createElement('template');
-blogPostTemplate.innerHTML =    `<div class="blog-post">
-                                    <p class="blog-title"></p>
+const blogPostEditTemplate = document.createElement('template');
+blogPostEditTemplate.innerHTML =    `<div class="preview-card">
+                                    <h3 class="blog-title"></h3>
                                     <time class="blog-date"></time>
                                     <p class="blog-summary"></p>
                                     <button class="blog-button button-like"><svg style="width:24px;height:24px" viewBox="0 0 24 24">
@@ -24,6 +24,13 @@ blogPostTemplate.innerHTML =    `<div class="blog-post">
                                     <button class="blog-button button-like"><svg style="width:24px;height:24px" viewBox="0 0 24 24">
     <path fill="currentColor" d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" />
 </svg>Delete</button>
+                                </div>`;
+
+const blogPostTemplate = document.createElement('template');
+blogPostTemplate.innerHTML =    `<div class="preview-card">
+                                    <h3 class="blog-title"></h3>
+                                    <time class="blog-date"></time>
+                                    <p class="blog-summary"></p>
                                 </div>`;
 
 const createBlogDialog = (title = '', date = '', summary = '') => {
@@ -39,8 +46,11 @@ const createBlogDialog = (title = '', date = '', summary = '') => {
     return blogDialog;
 } 
 
-const createBlogPost = (title = '', date = '', summary = '') => {
-    let blogPost = blogPostTemplate.content
+const createBlogPost = (title = '', date = '', summary = '', edit=false) => {
+    let blogPost = edit ? blogPostEditTemplate.content
+                                    .firstElementChild
+                                    .cloneNode(true)
+                        : blogPostTemplate.content
                                     .firstElementChild
                                     .cloneNode(true);
     let titleEl = blogPost.querySelector('.blog-title');

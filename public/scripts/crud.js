@@ -74,7 +74,7 @@ const setUpSave = (dialog, oldPost = undefined) => {
 };
 
 const addToBlogHolder = (item) => {
-    let blogHolder = document.getElementById('blogs');
+    let blogHolder = document.getElementById('blog-holder');
     blogHolder.appendChild(item);
 };
 
@@ -133,26 +133,31 @@ const setUpDelete = (blogPostEl) => {
 
 //Wire up elements here
 document.addEventListener('DOMContentLoaded', () => {
-    setUpAddButton();
-
-    //read from data base and place into object 
-    updateBlogHolderDB();
+    if(window.location.href.includes('blogedit.html')) {
+        setUpAddButton();
+        updateBlogHolderDB(true);
+    }
+    else{
+        updateBlogHolderDB(false);
+    }
 });
 
-const updateBlogHolderDB = async () => {
+const updateBlogHolderDB = async (edit=false) => {
     await database.ref('blogs/').once('value')
     .then((snapshot) => {
         blogsObj= snapshot.val();
     })
     .catch((e) => console.log(e));
     
-    let blogHolder = document.getElementById('blogs');
+    let blogHolder = document.getElementById('blog-holder');
     blogHolder.innerHTML = '';
     let blogPostEls = [];
+    let blogPostEl;
+    let post;
     blogsArrLength = 0;     //DONT KNOW IF NEED THIS ANYMORE
     for(let key in blogsObj) {
-        let post = blogsObj[key];
-        let blogPostEl = createBlogPost(post.title, post.date, post.summary);
+        post = blogsObj[key];
+        blogPostEl = createBlogPost(post.title, post.date, post.summary, edit);
         //setupedit()
         //setupDelete
         blogPostEls.push(blogPostEl);
