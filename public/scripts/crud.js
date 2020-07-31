@@ -45,8 +45,7 @@ const setUpSave = (dialog, oldPost = undefined) => {
         let blog = {title: titleString, date: dateString, summary: summaryString};
         if(!oldPost) //new post
         {
-            blogsArr.push(blog);
-
+            let newBlogRef = database.ref(`/blogs/${blog.title}`).set(blog);
             //remove empty message
             let message = document.getElementById('empty-message');
             message.classList.add('hide');
