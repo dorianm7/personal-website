@@ -6,4 +6,7 @@ I have been working on making the log in functionality working with Firebase for
 Status report 7/31/20 12:21am:
 After many hours I have a working log in page that will move you to and from blog edit page. Next step, set up and connect firebase.
 
+Status report 7/31/20 3:00am:
+Able to read from the database and place blogposts into blogedit.html. For points, the next step is to add a blogs section on my website to place those blog posts.
+
 
