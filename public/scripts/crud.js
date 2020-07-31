@@ -1,10 +1,6 @@
 import {createBlogDialog, createBlogPost} from './blog.js';
-import {database,
-        DB_URL,
-        DB_BLOGS_URL} from './firebase-db.js';
+import {database} from './firebase-db.js';
 
-//will add listeners from crud.html in here
-var blogsArr, blogsObj;
 var blogsArrLength; //used because array length lies when using delete
 
 //sets up add button listener
@@ -43,32 +39,17 @@ const setUpSave = (dialog, oldPost = undefined) => {
 
         //create blog object
         let blog = {title: titleString, date: dateString, summary: summaryString};
-        if(!oldPost) //new post
-        {
-            let newBlogRef = database.ref(`/blogs/${blog.title}`).set(blog);
-            //remove empty message
-            let message = document.getElementById('empty-message');
-            message.classList.add('hide');
+        if(!oldPost) { //new post
+            database.ref(`/blogs/${blog.title}`).set(blog);
         }
-        else //editing
-        {
-            //replace old, with edited
-            let index = blogsArr.findIndex((post) => {
-                if(post) {
-                    return (post.title === oldPost.title &&
-                        post.date === oldPost.date &&
-                        post.summary === oldPost.summary);
-                }
-            });
-            blogsArr[index] = blog;
+        else { //editing
+            database.ref(`/blogs/${oldPost.title}`).remove();
+            database.ref(`/blogs/${blog.title}`).set(blog);
         }
-        updateBlogHolder();
+        updateBlogHolderDB();
         //remove dialog
         dialog.close(false);
         dialog.parentNode.removeChild(dialog);
-
-        //update local storage
-        window.localStorage.setItem('blogs', JSON.stringify(blogsArr));
     });
 };
 
@@ -93,8 +74,6 @@ const setUpEdit = (blogPostEl) => {
         setUpSave(blogDialog, oldPost);
         document.body.appendChild(blogDialog);
         blogDialog.showModal();
-        //update local storage
-        window.localStorage.setItem('blogs', JSON.stringify(blogsArr));
     });
 };
 
@@ -103,30 +82,10 @@ const setUpDelete = (blogPostEl) => {
     let buttonEls = blogPostEl.querySelectorAll('button');
     let deleteButtonEl = buttonEls[1];
     let postTitle = blogPostEl.querySelector('.blog-title').innerText;
-    let postDate = blogPostEl.querySelector('.blog-date').innerText;
-    let postSummary = blogPostEl.querySelector('.blog-summary').innerText;
-    let toDelete = {title: postTitle, date: postDate, summary: postSummary};
 
     deleteButtonEl.addEventListener('click', () => {
-        let index = blogsArr.findIndex((oldPost) => {
-            return (oldPost && toDelete.title === oldPost.title &&
-                    toDelete.date === oldPost.date &&
-                    toDelete.summary === oldPost.summary);
-        });
-        if(index >= 0){
-            delete blogsArr[index];
-            blogsArrLength--;
-            //delete from local storage
-            if(blogsArrLength == 0){
-                let emptyMessage = document.getElementById('empty-message');
-                emptyMessage.classList.remove('hide');
-                window.localStorage.removeItem('blogs');
-            }
-            else {
-                window.localStorage.setItem('blogs', JSON.stringify(blogsArr));
-            }
-            updateBlogHolder();
-        }
+        database.ref(`/blogs/${postTitle}`).remove();
+        updateBlogHolderDB();
     });
 };
 
@@ -134,14 +93,15 @@ const setUpDelete = (blogPostEl) => {
 document.addEventListener('DOMContentLoaded', () => {
     if(window.location.href.includes('blogedit.html')) {
         setUpAddButton();
-        updateBlogHolderDB(true);
+        updateBlogHolderDB();
     }
     else{
         updateBlogHolderDB(false);
     }
 });
 
-const updateBlogHolderDB = async (edit=false) => {
+const updateBlogHolderDB = async (edit=true) => {
+    let blogsObj;
     await database.ref('blogs/').once('value')
     .then((snapshot) => {
         blogsObj= snapshot.val();
@@ -153,14 +113,24 @@ const updateBlogHolderDB = async (edit=false) => {
     let blogPostEls = [];
     let blogPostEl;
     let post;
-    blogsArrLength = 0;     //DONT KNOW IF NEED THIS ANYMORE
+    blogsArrLength = 0;
     for(let key in blogsObj) {
         post = blogsObj[key];
         blogPostEl = createBlogPost(post.title, post.date, post.summary, edit);
-        //setupedit()
-        //setupDelete
+        if(edit){
+            setUpEdit(blogPostEl);
+            setUpDelete(blogPostEl);
+        }
         blogPostEls.push(blogPostEl);
-        blogsArrLength++;   //DONT KNOW IF NEED THIS ANYMORE
+        blogsArrLength++;
+    }
+
+    let emptyMessage = document.getElementById('empty-message');
+    if(blogsArrLength == 0) {
+        emptyMessage.classList.remove('hide');
+    }
+    else{
+        emptyMessage.classList.add('hide');
     }
     blogPostEls.forEach(postEl => addToBlogHolder(postEl));
 };

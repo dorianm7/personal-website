@@ -46,7 +46,7 @@ const createBlogDialog = (title = '', date = '', summary = '') => {
     return blogDialog;
 } 
 
-const createBlogPost = (title = '', date = '', summary = '', edit=false) => {
+const createBlogPost = (title = '', date = '', summary = '', edit=true) => {
     let blogPost = edit ? blogPostEditTemplate.content
                                     .firstElementChild
                                     .cloneNode(true)
