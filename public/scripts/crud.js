@@ -1,7 +1,10 @@
 import {createBlogDialog, createBlogPost} from './blog.js';
+import {database,
+        DB_URL,
+        DB_BLOGS_URL} from './firebase-db.js';
 
 //will add listeners from crud.html in here
-var blogsArr;
+var blogsArr, blogsObj;
 var blogsArrLength; //used because array length lies when using delete
 
 //sets up add button listener
@@ -132,37 +135,28 @@ const setUpDelete = (blogPostEl) => {
 document.addEventListener('DOMContentLoaded', () => {
     setUpAddButton();
 
-    //read from local storage, place into array
-    blogsArr = JSON.parse(window.localStorage.getItem('blogs'));
-    blogsArrLength = 0;
-
-    //if deleted everything, start with some initial blogs
-    if(!blogsArr){
-        blogsArr = [{title: 'Initial1', date: '1914-11-12', summary: '1 Here is a short summary of something words.'},
-                        {title: 'Initial2', date: '1914-11-12', summary: '2 Here is a short summary of somethings words.'}];
-        window.localStorage.setItem('blogs', JSON.stringify(blogsArr));
-    }
-
-    updateBlogHolder();
+    //read from data base and place into object 
+    updateBlogHolderDB();
 });
 
-//populate blog holder
-const updateBlogHolder = () => {
-    //create blog post elements from blogs in array
+const updateBlogHolderDB = async () => {
+    await database.ref('blogs/').once('value')
+    .then((snapshot) => {
+        blogsObj= snapshot.val();
+    })
+    .catch((e) => console.log(e));
+    
     let blogHolder = document.getElementById('blogs');
     blogHolder.innerHTML = '';
-    let blogPostEls = []
-    blogsArrLength = 0;
-    blogsArr.forEach(post => {
-        if(post) {
-            let blogPostEl = createBlogPost(post.title, post.date, post.summary);
-            setUpEdit(blogPostEl);
-            setUpDelete(blogPostEl);
-            blogPostEls.push(blogPostEl);
-            blogsArrLength++;
-        }
-    });
-
-    //place blog post elements in blog holder 
+    let blogPostEls = [];
+    blogsArrLength = 0;     //DONT KNOW IF NEED THIS ANYMORE
+    for(let key in blogsObj) {
+        let post = blogsObj[key];
+        let blogPostEl = createBlogPost(post.title, post.date, post.summary);
+        //setupedit()
+        //setupDelete
+        blogPostEls.push(blogPostEl);
+        blogsArrLength++;   //DONT KNOW IF NEED THIS ANYMORE
+    }
     blogPostEls.forEach(postEl => addToBlogHolder(postEl));
 };

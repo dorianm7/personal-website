@@ -1,7 +1,8 @@
 import {auth} from './firebase-init.js';
+import {database} from './firebase-db.js';
 
 auth.onAuthStateChanged(function(user) {
-    console.log('user' + user);
+    //placeholder
 });
 
 const attachSignOutBtn = () => {
