@@ -38,8 +38,8 @@ const handle = (event) => {
             break;
         case 'Get':
             method = 'get';
-            openSendXHRFunction = openSendGetXHR;
-            fetchFunction = getFetch;
+            openSendXHRFunction = openSendGetDeleteXHR;
+            fetchFunction = getDeleteFetch;
             break;
         case 'Put':
             method = 'put';
@@ -48,8 +48,8 @@ const handle = (event) => {
             break;
         case 'Delete':
             method = 'delete'; 
-            openSendXHRFunction = openSendDeleteXHR;
-            fetchFunction = deleteFetch;
+            openSendXHRFunction = openSendGetDeleteXHR;
+            fetchFunction = getDeleteFetch;
             break;
     }
     action = `https://httpbin.org/${method}`;
@@ -59,8 +59,10 @@ const handle = (event) => {
         xhr.onload = () => {
             output.value = JSON.stringify(JSON.parse(xhr.responseText), undefined, 4);
         };
+        delete data.submitType; //not part of the request
         openSendXHRFunction(xhr, data, method, action);
     } else {
+        delete data.submitType;//not part of the request
         fetchFunction(data, method, action)
         .then(response => response.json())
         .then(responseData => {
@@ -71,7 +73,6 @@ const handle = (event) => {
 };
 
 const postPutFetch = (data, method, action) => {
-    delete data.submitType; //not part of info needed
     let options = {
         method: method,
         headers: {
@@ -83,42 +84,34 @@ const postPutFetch = (data, method, action) => {
     return fetch(action, options);
 }
 
-const getFetch = (data, method, action) => {
-    let validUri = getActionURL(action, data); 
-    return fetch(validUri, {
-        method: method
-    });
-};
-
-//assuming backend is only expecting the id the resource to delete
-const deleteFetch = (data, method, action) => {
-    return fetch(`${action}?id=${data.id}`, {
+//assuming backend is only expecting the id the resource for GET and DELETE 
+const getDeleteFetch = (data, method, action) => {
+    return fetch(`${action}?id=${encodeURIComponent(data.id)}`, {
         method: method
     });
 }
 
 const openSendPostPutXHR = (xhr, data, method, action) => {
-    delete data.submitType;
     xhr.open(method, action, true);
     xhr.setRequestHeader('Content-Type', 'application/json');
     xhr.send(JSON.stringify(data));
 };
 
-const openSendGetXHR = (xhr, data, method, action) => {
-    let validUri = getActionURL(action, data);
-    xhr.open(method, validUri, true);
+//Assuming backend is only expecting the id of the resource for GET and DELETE
+const openSendGetDeleteXHR = (xhr, data, method, action) => {
+    xhr.open(method, `${action}?id=${encodeURIComponent(data.id)}`, true);
     xhr.send();
 };
 
-//Assuming backend is only expecting the id of the resource to delete
-const openSendDeleteXHR = (xhr, data, method, action) => {
-    xhr.open(method, `${action}?id=${data.id}`, true);
-    xhr.send();
-};
-
-const getActionURL = (action, obj) => {
-    return encodeURI(`${action}?id=${obj.id}&articleName=${obj.articleName}&articleBody=${obj.articleBody}&date=${obj.date}`)
-            .replaceAll('%20', '+');
+const getEncodedData = (obj) => {
+    let encodedDataPairs = [];
+    let encodedProp, encodedVal;
+    for(let prop in obj){
+        encodedProp = encodeURIComponent(prop);
+        encodedVal = encodeURIComponent(obj[prop]);
+        encodedDataPairs.push(`${encodedProp}=${encodedVal}`);
+    }
+    return encodedDataPairs.join('&').replace(/%20/g, '+');
 };
 
 //set up
