@@ -40,11 +40,13 @@ const setUpSave = (dialog, oldPost = undefined) => {
         //create blog object
         let blog = {title: titleString, date: dateString, summary: summaryString};
         if(!oldPost) { //new post
-            database.ref(`/blogs/${blog.title}`).set(blog);
+            database.ref(`/blogs/${blog.title}`).set(blog)
+                .catch((e) => alert(e));
         }
         else { //editing
             database.ref(`/blogs/${oldPost.title}`).remove();
-            database.ref(`/blogs/${blog.title}`).set(blog);
+            database.ref(`/blogs/${blog.title}`).set(blog)
+                .catch((e) => alert(e));
         }
         updateBlogHolderDB();
         //remove dialog
@@ -84,7 +86,8 @@ const setUpDelete = (blogPostEl) => {
     let postTitle = blogPostEl.querySelector('.blog-title').innerText;
 
     deleteButtonEl.addEventListener('click', () => {
-        database.ref(`/blogs/${postTitle}`).remove();
+        database.ref(`/blogs/${postTitle}`).remove()
+            .catch((e) => alert(e));
         updateBlogHolderDB();
     });
 };

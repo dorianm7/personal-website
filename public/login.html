@@ -6,15 +6,52 @@
     <title>Log In</title>
     <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
     <script src="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
     <script src="scripts/firebase-init.js" type="module"></script>
     <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-auth.js"></script>
     <script src="scripts/login.js" type="module"></script>
-    <script src="scripts/customDialog.js" type="module"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.5.2/firebaseui.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/style_min.css">
 </head>
 <body>
-    <h1>Log In</h1>
-    <div id="firebaseui-auth-container"></div>
-    <div id="loader">Loading...</div>
+    <header>
+        <nav id="navbar">
+            <a href="index.html" id="name-home-link">Dorian Alexis Maldonado</a>
+            <ul id="nav-menu" class="menu">
+                <li class="menu-item"><a href="index.html">Home</a></li>
+                <li class="menu-item"><a href="index.html#about">About</a></li>
+                <li class="menu-item"><a href="index.html#bio">Bio</a></li>
+                <li class="menu-item dropdown"><a href="index.html#projects">Projects</a>
+                    <ul class="menu">
+                        <li class="menu-item"><a href="projects.html#rum8">Rum8</a></li>
+                        <li class="menu-item"><a href="projects.html#clubhouse-dungeons">Clubhouse Dungeons</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item"><a href="index.html#leadership">Leadership</a></li>
+                <li class="menu-item dropdown"><a href="index.html#extracurriculars">Extracurriculars</a>
+                    <ul class="menu">
+                        <li class="menu-item"><a href="extracurriculars.html#ksdt">KSDT Radio DJ</a></li>
+                        <li class="menu-item"><a href="extracurriculars.html#tfsrs">TFSRS Member</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item"><a href="index.html#blogs">Blogs</a></li>
+                <li class="menu-item"><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <a href="index.html">
+                <svg viewBox="0 0 24 24" id="back-icon">
+                    <title>Go back</title>
+                    <path fill="currentColor" d="M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z" />
+                </svg>
+            </a>
+        </nav>
+    </header>
+    <main>
+        <h1>Log In</h1>
+        <div id="firebaseui-auth-container"></div>
+        <div id="loader">Loading...</div>
+    </main>
+    <footer>
+        <hr>
+        <p>Copyright 2020</p>
+    </footer>
 </body>
 </html>

@@ -9,7 +9,13 @@
     <title>Dorian Maldonado | CS Student</title>
     <link rel="stylesheet" type="text/css" href="./styles/style_min.css">
     <script defer src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f1f0a7556c517b8"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+    <script src="scripts/firebase-init.js" type="module"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-database.js"></script>
+    <script src="scripts/firebase-db.js" type="module"></script>
     <script src="scripts/script.js"></script>
+    <script src="scripts/crud.js" type="module"></script>
 </head>
 <body>
     <header>
@@ -32,6 +38,7 @@
                         <li class="menu-item"><a href="extracurriculars.html#tfsrs">TFSRS Member</a></li>
                     </ul>
                 </li>
+                <li class="menu-item"><a href="#blogs">Blogs</a></li>
                 <li class="menu-item"><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -110,6 +117,12 @@
                     <p>I volunteer at K12 schools through TFSRS, an organization focused on STEAM education through K12 outreach and workshops.</p>
                     <a href="extracurriculars.html#tfsrs" class="button-like">Learn More</a>
                 </section>
+            </div>
+        </section>
+        <section id="blogs">
+            <h2>Blogs</h2>
+            <p id="empty-message">None at the moment</p>
+            <div id="blog-holder" class="card-holder">
             </div>
         </section>
         <section id="contact">
