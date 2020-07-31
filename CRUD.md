@@ -14,3 +14,6 @@ Able to add blog posts to index. Now can try to connect the edit and delete butt
 
 Status report 7/31/20 4:31am:
 Styled blog posts. Going to try to implement edit and delete.
+
+Status report 7/31/20 5:26am:
+Implemented edit and delete. Need to style blogedit.html, reminify index.html
