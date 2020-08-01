@@ -16,5 +16,5 @@ Content / Design Changes
 - Fix styling on all pages  
 - Add meta viewport so devices can view pages nicely  
 - Added meta descriptions and keywords to help with SEO  
-- Was able to do the extra credit and add a blog section fully connected to a Firebase database. See CRUD.md
+- Was able to do the extra credit and add a blog section fully connected to a Firebase database. See README.md part 3.
 
