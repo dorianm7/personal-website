@@ -3,12 +3,14 @@ https://cse134b-hw5-f0af8.firebaseapp.com
 
 **For the graders**  
 **Part 1** - HTTP with Javascript:  
+Page found at: https://cse134b-hw5-f0af8.firebaseapp.com/methodtest.html  
+Code found at: 'scripts/http.js'  
 For GET and DELETE requests the only fields used will be the ID field. This is to show that in order to GET or DELETE a specific resource I only need the id of that resource.  
 For POST and PUT requests all the fields will be used. Since we are either placing or replacing a resource, all the fields will be used in doing so.  
 
 **Part 2** - Emergent Features:  
 See Changelog.md.  
-Many of the HTML/CSS files have been minified and are being used in "production" in '134b-hw5/public/' directory. To find the unminified files you will find them in the '134b-hw5/' directory with the format file_big.extension For example: '134b-hw5/public/404.html' has a corresponding '134b-hw5/404_big.html'  
+Many of the HTML/CSS files have been minified and are being used in "production" in the '134b-hw5/public/' directory. To find the unminified files you will find them in the '134b-hw5/' directory with the format 'file_big.extension' For example: '134b-hw5/public/404.html' has a corresponding '134b-hw5/404_big.html'  
 
 **Extra Credit Part 3** - CRUD Application:  
 See CRUD.md.  
