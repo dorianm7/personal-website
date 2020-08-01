@@ -40,6 +40,10 @@ auth.onAuthStateChanged(function(user) {
             window.location.href = '../login.html';
         }
         else{
+            //body of 'blogedit.html' is hidden by default. Unhide if authorized
+            //User could unhide through CSS and disable Javascript to prevent redirect,
+            // but none of the information is sensitive. Possible to make body a template and
+            // insert it when the user is authorized to prevent from any information leaking
             document.querySelector('body').style.display = '';
         }
     }

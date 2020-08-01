@@ -8,7 +8,7 @@ blogDialogTemplate.innerHTML =  `<dialog>
                                         <label for="summary">Summary</label>
                                         <input type="text" id="summary">
 
-                                        <input type="submit" value="Save" id="save" class="button-like">
+                                        <input type="button" value="Save" id="save" class="button-like">
                                         <input type="reset" value="Cancel" id="cancel" class="button-like">
                                     </form>
                                 </dialog>`;
