@@ -1,8 +1,6 @@
 import {createBlogDialog, createBlogPost} from './blog.js';
 import {database} from './firebase-db.js';
 
-var blogsArrLength; //used because array length lies when using delete
-
 //sets up add button listener
 const setUpAddButton = () => {
     let addButton = document.getElementById('add-button');
@@ -92,31 +90,22 @@ const setUpDelete = (blogPostEl) => {
     });
 };
 
-//Wire up elements here
-document.addEventListener('DOMContentLoaded', () => {
-    if(window.location.href.includes('blogedit.html')) {
-        setUpAddButton();
-        updateBlogHolderDB();
-    }
-    else{
-        updateBlogHolderDB(false);
-    }
-});
-
 const updateBlogHolderDB = async (edit=true) => {
     let blogsObj;
+    //Get blogs from the database
     await database.ref('blogs/').once('value')
-    .then((snapshot) => {
-        blogsObj= snapshot.val();
-    })
-    .catch((e) => console.log(e));
+        .then((snapshot) => {
+            blogsObj = snapshot.val();
+        })
+        .catch((e) => console.log(e));
     
-    let blogHolder = document.getElementById('blog-holder');
-    blogHolder.innerHTML = '';
     let blogPostEls = [];
     let blogPostEl;
     let post;
-    blogsArrLength = 0;
+    let blogsArrLength = 0;
+    let blogHolder = document.getElementById('blog-holder');
+    blogHolder.innerHTML = '';
+
     for(let key in blogsObj) {
         post = blogsObj[key];
         blogPostEl = createBlogPost(post.title, post.date, post.summary, edit);
@@ -137,3 +126,14 @@ const updateBlogHolderDB = async (edit=true) => {
     }
     blogPostEls.forEach(postEl => addToBlogHolder(postEl));
 };
+
+//Wire up elements here
+document.addEventListener('DOMContentLoaded', () => {
+    if(window.location.href.includes('blogedit.html')) {
+        setUpAddButton();
+        updateBlogHolderDB();
+    }
+    else{
+        updateBlogHolderDB(false);
+    }
+});
