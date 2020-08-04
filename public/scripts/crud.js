@@ -1,8 +1,5 @@
 import {createBlogDialog, createBlogPost} from './blog.js';
-
-//will add listeners from crud.html in here
-var blogsArr;
-var blogsArrLength; //used because array length lies when using delete
+import {database} from './firebase-db.js';
 
 //sets up add button listener
 const setUpAddButton = () => {
@@ -40,38 +37,24 @@ const setUpSave = (dialog, oldPost = undefined) => {
 
         //create blog object
         let blog = {title: titleString, date: dateString, summary: summaryString};
-        if(!oldPost) //new post
-        {
-            blogsArr.push(blog);
-
-            //remove empty message
-            let message = document.getElementById('empty-message');
-            message.classList.add('hide');
+        if(!oldPost) { //new post
+            database.ref(`/blogs/${blog.title}`).set(blog)
+                .catch((e) => alert(e));
         }
-        else //editing
-        {
-            //replace old, with edited
-            let index = blogsArr.findIndex((post) => {
-                if(post) {
-                    return (post.title === oldPost.title &&
-                        post.date === oldPost.date &&
-                        post.summary === oldPost.summary);
-                }
-            });
-            blogsArr[index] = blog;
+        else { //editing
+            database.ref(`/blogs/${oldPost.title}`).remove();
+            database.ref(`/blogs/${blog.title}`).set(blog)
+                .catch((e) => alert(e));
         }
-        updateBlogHolder();
+        updateBlogHolderDB();
         //remove dialog
         dialog.close(false);
         dialog.parentNode.removeChild(dialog);
-
-        //update local storage
-        window.localStorage.setItem('blogs', JSON.stringify(blogsArr));
     });
 };
 
 const addToBlogHolder = (item) => {
-    let blogHolder = document.getElementById('blogs');
+    let blogHolder = document.getElementById('blog-holder');
     blogHolder.appendChild(item);
 };
 
@@ -91,8 +74,6 @@ const setUpEdit = (blogPostEl) => {
         setUpSave(blogDialog, oldPost);
         document.body.appendChild(blogDialog);
         blogDialog.showModal();
-        //update local storage
-        window.localStorage.setItem('blogs', JSON.stringify(blogsArr));
     });
 };
 
@@ -101,68 +82,58 @@ const setUpDelete = (blogPostEl) => {
     let buttonEls = blogPostEl.querySelectorAll('button');
     let deleteButtonEl = buttonEls[1];
     let postTitle = blogPostEl.querySelector('.blog-title').innerText;
-    let postDate = blogPostEl.querySelector('.blog-date').innerText;
-    let postSummary = blogPostEl.querySelector('.blog-summary').innerText;
-    let toDelete = {title: postTitle, date: postDate, summary: postSummary};
 
     deleteButtonEl.addEventListener('click', () => {
-        let index = blogsArr.findIndex((oldPost) => {
-            return (oldPost && toDelete.title === oldPost.title &&
-                    toDelete.date === oldPost.date &&
-                    toDelete.summary === oldPost.summary);
-        });
-        if(index >= 0){
-            delete blogsArr[index];
-            blogsArrLength--;
-            //delete from local storage
-            if(blogsArrLength == 0){
-                let emptyMessage = document.getElementById('empty-message');
-                emptyMessage.classList.remove('hide');
-                window.localStorage.removeItem('blogs');
-            }
-            else {
-                window.localStorage.setItem('blogs', JSON.stringify(blogsArr));
-            }
-            updateBlogHolder();
-        }
+        database.ref(`/blogs/${postTitle}`).remove()
+            .catch((e) => alert(e));
+        updateBlogHolderDB();
     });
+};
+
+const updateBlogHolderDB = async (edit=true) => {
+    let blogsObj;
+    //Get blogs from the database
+    await database.ref('blogs/').once('value')
+        .then((snapshot) => {
+            blogsObj = snapshot.val();
+        })
+        .catch((e) => console.log(e));
+    
+    let blogPostEls = [];
+    let blogPostEl;
+    let post;
+    let blogsArrLength = 0;
+    let blogHolder = document.getElementById('blog-holder');
+    blogHolder.innerHTML = '';
+
+    for(let key in blogsObj) {
+        post = blogsObj[key];
+        blogPostEl = createBlogPost(post.title, post.date, post.summary, edit);
+        if(edit){
+            setUpEdit(blogPostEl);
+            setUpDelete(blogPostEl);
+        }
+        blogPostEls.push(blogPostEl);
+        blogsArrLength++;
+    }
+
+    let emptyMessage = document.getElementById('empty-message');
+    if(blogsArrLength == 0) {
+        emptyMessage.classList.remove('hide');
+    }
+    else{
+        emptyMessage.classList.add('hide');
+    }
+    blogPostEls.forEach(postEl => addToBlogHolder(postEl));
 };
 
 //Wire up elements here
 document.addEventListener('DOMContentLoaded', () => {
-    setUpAddButton();
-
-    //read from local storage, place into array
-    blogsArr = JSON.parse(window.localStorage.getItem('blogs'));
-    blogsArrLength = 0;
-
-    //if deleted everything, start with some initial blogs
-    if(!blogsArr){
-        blogsArr = [{title: 'Initial1', date: '1914-11-12', summary: '1 Here is a short summary of something words.'},
-                        {title: 'Initial2', date: '1914-11-12', summary: '2 Here is a short summary of somethings words.'}];
-        window.localStorage.setItem('blogs', JSON.stringify(blogsArr));
+    if(window.location.href.includes('blogedit.html')) {
+        setUpAddButton();
+        updateBlogHolderDB();
     }
-
-    updateBlogHolder();
+    else{
+        updateBlogHolderDB(false);
+    }
 });
-
-//populate blog holder
-const updateBlogHolder = () => {
-    //create blog post elements from blogs in array
-    let blogHolder = document.getElementById('blogs');
-    blogHolder.innerHTML = '';
-    let blogPostEls = []
-    blogsArrLength = 0;
-    blogsArr.forEach(post => {
-        if(post) {
-            let blogPostEl = createBlogPost(post.title, post.date, post.summary);
-            setUpEdit(blogPostEl);
-            setUpDelete(blogPostEl);
-            blogPostEls.push(blogPostEl);
-            blogsArrLength++;
-        }
-    });
-
-    //place blog post elements in blog holder 
-    blogPostEls.forEach(postEl => addToBlogHolder(postEl));
-};

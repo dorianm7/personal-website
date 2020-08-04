@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=800">
+    <meta name="description" content="Dorian Alexis Maldonado, senior Computer Science
+        student at UCSD personal resume website. Learn about the projects and activities I have done.">
+    <meta name="keywords" content="UCSD, senior, computer science, student, software engineer, Dorian Alexis Maldonado">
+    <title>Dorian Maldonado | CS Student</title>
+    <link rel="stylesheet" type="text/css" href="./styles/style_min.css">
+    <script defer src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5f1f0a7556c517b8"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-app.js"></script>
+    <script src="scripts/firebase-init.js" type="module"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.17.1/firebase-database.js"></script>
+    <script src="scripts/firebase-db.js" type="module"></script>
+    <script src="scripts/script.js"></script>
+    <script src="scripts/crud.js" type="module"></script>
+</head>
+<body>
+    <header>
+        <nav id="navbar">
+            <a href="index.html" id="name-home-link">Dorian Alexis Maldonado</a>
+            <ul id="nav-menu" class="menu">
+                <li class="menu-item"><a href="index.html">Home</a></li>
+                <li class="menu-item"><a href="#about">About</a></li>
+                <li class="menu-item"><a href="#bio">Bio</a></li>
+                <li class="menu-item dropdown"><a href="#projects">Projects</a>
+                    <ul class="menu">
+                        <li class="menu-item"><a href="projects.html#rum8">Rum8</a></li>
+                        <li class="menu-item"><a href="projects.html#clubhouse-dungeons">Clubhouse Dungeons</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item"><a href="#leadership">Leadership</a></li>
+                <li class="menu-item dropdown"><a href="#extracurriculars">Extracurriculars</a>
+                    <ul class="menu">
+                        <li class="menu-item"><a href="extracurriculars.html#ksdt">KSDT Radio DJ</a></li>
+                        <li class="menu-item"><a href="extracurriculars.html#tfsrs">TFSRS Member</a></li>
+                    </ul>
+                </li>
+                <li class="menu-item"><a href="#blogs">Blogs</a></li>
+                <li class="menu-item"><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        <div id="hero-container">
+            <div id="hero-info">
+                <p><em>"If a lotus is to grow, it needs to be rooted in the mud." - Thích Nhất Hạnh</em></p>
+                <div id="hero-social-contact-container">
+                    <a href="https://github.com/dorianm7" target="_blank" rel="noopener">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <title>Dorian's Github</title>
+                            <path fill="currentColor" d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z" />
+                        </svg></a>
+                    <a href="https://www.linkedin.com/in/dorian-maldonado/" target="_blank" rel="noopener">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <title>Dorian's Linkedin</title>
+                            <path fill="currentColor" d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z" />
+                        </svg></a>
+                </div>
+                <button id="download-resume-button" type="button" class="button-like">Download Resume</button>
+            </div>
+           <img src="images/me.webp" alt="Dorian Alexis Maldonado's hero image" loading="lazy">
+        </div>
+    </header>
+       
+    <main>
+        <section id="about">
+            <h2>About</h2>
+            <p>Current senior Computer Science major at UC San Diego, future Software Engineer, past music producer.</p>
+        </section>
+
+        <section id="bio">
+            <h2>Bio</h2>
+            <p>Proud first generation Mexican-American born and raised in Southern California.</p> 
+        </section>
+
+        <section id="projects">
+            <h2>Projects</h2>
+            <div class="card-holder">
+                <section id="index-projects-rum8" class="preview-card">
+                    <h3>R&#xfc;m8</h3>
+                    <p><strong>User Interface Specialist</strong></p>
+                    <p>Part of a team of 10, I helped design an Android application used to help students find their next potential roomates!</p>
+                    <a href="projects.html#rum8" class="button-like">Learn More</a>
+                </section>
+
+                <section id="index-projects-clubhouse-dungeons" class="preview-card">
+                    <h3>Clubhouse Dungeons</h3>
+                    <p><strong>Team Lead</strong></p>
+                    <p>I led a team of 13 in creating a Google Chrome extension used to help team productivity through the 
+                        gamification of user stories.</p>
+                    <a href="projects.html#clubhouse-dungeons" class="button-like">Learn More</a>
+                </section>
+            </div>
+        </section>
+        
+        <section id="leadership">
+            <h2>Leadership</h2>
+            <p>Taken place during the COVID-19 pandemic, I virtually led a team of 13 in developing a product useful for 
+                individuals working remotely. With maintainability in mind and less than 8 weeks, we were tasked in pitching ideas, 
+                researching technologies, creating demos, build pipelines, tests, documentation, and ultimately a working product that
+                could live on following any type of team changes.</p>
+            <p>Learn more about <strong>Clubhouse Dungeons</strong> above!</p>
+        </section>
+        
+        <section id="extracurriculars">
+            <h2>Extracurriculars</h2>
+            <div class="card-holder">
+                <section id="index-extracurriculars-ksdt" class="preview-card">
+                    <h3>KSDT Radio DJ</h3>
+                    <p>I host my own radio show focusing on lesser known music ranging from Dub, Dubstep, Garage, Grime, Soundcloud Rap, Club, and more.</p>
+                    <a href="extracurriculars.html#ksdt" class="button-like">Learn More</a>
+                </section>
+
+                <section id="index-extracurriculars-tfsrs" class="preview-card"> 
+                    <h3>TFSRS Member</h3>
+                    <p>I volunteer at K12 schools through TFSRS, an organization focused on STEAM education through K12 outreach and workshops.</p>
+                    <a href="extracurriculars.html#tfsrs" class="button-like">Learn More</a>
+                </section>
+            </div>
+        </section>
+        <section id="blogs">
+            <h2>Blogs</h2>
+            <p id="empty-message">None at the moment</p>
+            <div id="blog-holder" class="card-holder">
+            </div>
+        </section>
+        <section id="contact">
+            <h2>Contact</h2>
+            <div id="contact-card">
+                <div id="contact-info">
+                    <p>Dorian Alexis Maldonado</p>
+                    <p>email: d1maldon@ucsd.eduu</p>
+                    <div id="contact-social-container">
+                        <a href="https://github.com/dorianm7" target="_blank" rel="noopener">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <title>Dorian's Github</title>
+                            <path fill="currentColor" d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z" />
+                        </svg></a>
+                    <a href="https://www.linkedin.com/in/dorian-maldonado/" target="_blank" rel="noopener">
+                        <svg class="icon" viewBox="0 0 24 24">
+                            <title>Dorian's Linkedin</title>
+                            <path fill="currentColor" d="M19 3A2 2 0 0 1 21 5V19A2 2 0 0 1 19 21H5A2 2 0 0 1 3 19V5A2 2 0 0 1 5 3H19M18.5 18.5V13.2A3.26 3.26 0 0 0 15.24 9.94C14.39 9.94 13.4 10.46 12.92 11.24V10.13H10.13V18.5H12.92V13.57C12.92 12.8 13.54 12.17 14.31 12.17A1.4 1.4 0 0 1 15.71 13.57V18.5H18.5M6.88 8.56A1.68 1.68 0 0 0 8.56 6.88C8.56 5.95 7.81 5.19 6.88 5.19A1.69 1.69 0 0 0 5.19 6.88C5.19 7.81 5.95 8.56 6.88 8.56M8.27 18.5V10.13H5.5V18.5H8.27Z" />
+                        </svg></a>
+                    </div>
+                </div>
+                <img src="images/me.webp" alt="Dorian's picture" loading="lazy">
+            </div>
+        </section>
+        <div id="venmo-container" class="addthis_tipjar_inline"></div>
+    </main>
+    <footer>
+        <hr>
+        <p>Copyright 2020</p>
+    </footer>
+</body>
+</html>
