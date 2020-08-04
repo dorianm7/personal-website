@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Custom Dialogs</title>
+    <script src="./scripts/purify.min.js"></script>
+    <script src="./scripts/customDialog.js" type="module"></script>
+    <script type="module">
+        import {myAlert, myConfirm, myPrompt, createDialog} from './scripts/customDialog.js';
+        window.addEventListener('DOMContentLoaded', () => {
+            let alertButton = document.getElementById('alert');
+            let confirmButton  = document.getElementById('confirm');
+            let promptButton = document.getElementById('prompt');
+            let saferPromptButton = document.getElementById('safe-prompt');
+            let outputEl = document.getElementById('output');
+
+            alertButton.addEventListener('click', () => {
+                myAlert('Alert!');
+            });
+
+            confirmButton.addEventListener('click', () => {
+                // let result = myConfirm('Do you confirm this?');
+                
+                // if(result){
+                //     outputEl.innerHTML = `The value return by the confirm method is: ${result}`;
+                // }
+                // else{
+                //     outputEl.innerHTML = 'User didn\'t enter anything';
+                // }
+
+                let confirmDialog = createDialog('confirm', 'Do you confirm this?');
+                let buttons = confirmDialog.querySelectorAll('button');
+                let cancelButton = buttons[0];
+                let okButton = buttons[1];
+                cancelButton.addEventListener('click', () => {
+                    outputEl.innerHTML = 'User didn\'t enter anything.';
+                    confirmDialog.close(false);
+                    confirmDialog.parentNode.removeChild(confirmDialog);
+                });
+                okButton.addEventListener('click', () => {
+                    confirmDialog.returnValue = true;
+                    outputEl.innerHTML = `The value return by the confirm method is: ${confirmDialog.returnValue}`;
+                    confirmDialog.close(true);
+                    confirmDialog.parentNode.removeChild(confirmDialog);
+                });
+
+                document.body.appendChild(confirmDialog);
+                confirmDialog.showModal();
+            });
+
+            promptButton.addEventListener('click', () => {
+                // let result = myPrompt('What is your name?');
+                // if(result) {
+                //     outputEl.innerHTML = `The value return by the confirm method is: ${res}`;
+                // }
+                // else {
+                //     outputEl.innerHTML = 'User didn\'t enter anything';
+                // }
+
+                let promptDialog = createDialog('prompt', 'What is your name?');
+                let textEl = promptDialog.querySelector('input');
+                let buttons = promptDialog.querySelectorAll('button');
+                let cancelButton = buttons[0];
+                let okButton = buttons[1];
+                cancelButton.addEventListener('click', () => {
+                    promptDialog.returnValue = null;
+                    outputEl.innerHTML = 'User didn\'t enter anything.';
+                    promptDialog.close(false);
+                    promptDialog.parentNode.removeChild(promptDialog);
+                });
+                okButton.addEventListener('click', () => {
+                    promptDialog.returnValue = textEl.value;
+                    outputEl.innerHTML = `Prompt result: ${promptDialog.returnValue}`;
+                    promptDialog.close(true);
+                    promptDialog.parentNode.removeChild(promptDialog);
+                });
+
+                document.body.appendChild(promptDialog);
+                promptDialog.showModal();
+            });
+
+            const promptTag = (strings, name) => {
+                let firstStr = strings[0];
+                let cleanInput = DOMPurify.sanitize(name);
+                return `${firstStr}${cleanInput}`;
+            };
+
+            saferPromptButton.addEventListener('click', () => {
+                let saferPromptDialog = createDialog('prompt', 'What is your name?');
+                let textEl = saferPromptDialog.querySelector('input');
+                let buttons = saferPromptDialog.querySelectorAll('button');
+                let cancelButton = buttons[0];
+                let okButton = buttons[1];
+                cancelButton.addEventListener('click', () => {
+                    saferPromptDialog.returnValue = null;
+                    outputEl.innerHTML = 'User didn\'t enter anything.';
+                    saferPromptDialog.close(false);
+                    saferPromptDialog.parentNode.removeChild(saferPromptDialog);
+                });
+                okButton.addEventListener('click', () => {
+                    saferPromptDialog.returnValue = promptTag`${textEl.value}`;
+                    outputEl.innerHTML = promptTag`Prompt result: ${saferPromptDialog.returnValue}`;
+                    saferPromptDialog.close(true);
+                    saferPromptDialog.parentNode.removeChild(saferPromptDialog);
+                });
+
+                document.body.appendChild(saferPromptDialog);
+                saferPromptDialog.showModal();
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <main>
+        <form>
+            <input type="button" value="Alert" id="alert">
+            <input type="button" value="Confirm" id="confirm">
+            <input type="button" value="Prompt" id="prompt">
+            <input type="button" value="Safe Prompt" id="safe-prompt">
+
+            <output for="alert confirm prompt safe-prompt" name="result" id="output"></output>
+        </form>
+    </main>
+</body>
+</html>

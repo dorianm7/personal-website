@@ -435,3 +435,9 @@ hr {
     padding: 10px;
     border-radius: 10px;
 }
+
+#venmo-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
