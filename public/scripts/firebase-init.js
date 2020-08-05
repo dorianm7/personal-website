@@ -1,12 +1,12 @@
 var firebaseConfig = {
-    apiKey: "AIzaSyBMY9iaR4u74g6x0i_XeoFbEJfUDLpManM",
-    authDomain: "cse134b-hw5-f0af8.firebaseapp.com",
-    databaseURL: "https://cse134b-hw5-f0af8.firebaseio.com",
-    projectId: "cse134b-hw5-f0af8",
-    storageBucket: "cse134b-hw5-f0af8.appspot.com",
-    messagingSenderId: "337467895487",
-    appId: "1:337467895487:web:276909736d9eef43aea00a"
-};
+    apiKey: "AIzaSyAXMIHD0aUJKyIWd8GHgB30MvE68AigvZQ",
+    authDomain: "dorian-alexis-maldonado.firebaseapp.com",
+    databaseURL: "https://dorian-alexis-maldonado.firebaseio.com",
+    projectId: "dorian-alexis-maldonado",
+    storageBucket: "dorian-alexis-maldonado.appspot.com",
+    messagingSenderId: "436846424535",
+    appId: "1:436846424535:web:df3d4d0cf8cb7d7a379b92"
+  };
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
