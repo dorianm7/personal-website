@@ -53,11 +53,6 @@ const setUpSave = (dialog, oldPost = undefined) => {
     });
 };
 
-const addToBlogHolder = (item) => {
-    let blogHolder = document.getElementById('blog-holder');
-    blogHolder.appendChild(item);
-};
-
 //sets up the edit button for the given blog post element
 const setUpEdit = (blogPostEl) => {
     let buttonEls = blogPostEl.querySelectorAll('button');
@@ -99,7 +94,6 @@ const updateBlogHolderDB = async (edit=true) => {
         })
         .catch((e) => console.log(e));
     
-    let blogPostEls = [];
     let blogPostEl;
     let post;
     let blogsArrLength = 0;
@@ -113,7 +107,7 @@ const updateBlogHolderDB = async (edit=true) => {
             setUpEdit(blogPostEl);
             setUpDelete(blogPostEl);
         }
-        blogPostEls.push(blogPostEl);
+        blogHolder.appendChild(blogPostEl);
         blogsArrLength++;
     }
 
@@ -124,7 +118,6 @@ const updateBlogHolderDB = async (edit=true) => {
     else{
         emptyMessage.classList.add('hide');
     }
-    blogPostEls.forEach(postEl => addToBlogHolder(postEl));
 };
 
 //Wire up elements here
