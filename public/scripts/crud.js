@@ -1,5 +1,5 @@
 import {createBlogDialog, createBlogPost} from './blog.js';
-import {database} from './firebase-db.js';
+import {database, getBlogsDB} from './firebase-db.js';
 
 //sets up add button listener
 const setUpAddButton = () => {
@@ -86,24 +86,17 @@ const setUpDelete = (blogPostEl) => {
 };
 
 const updateBlogHolderDB = async (edit=true) => {
-    let blogsObj;
-    //Get blogs from the database
-    await database.ref('blogs/').once('value')
-        .then((snapshot) => {
-            blogsObj = snapshot.val();
-        })
-        .catch((e) => console.log(e));
-    
     let blogPostEl;
     let post;
     let blogsArrLength = 0;
+    let blogsDB = await getBlogsDB();
     let blogHolder = document.getElementById('blog-holder');
     blogHolder.innerHTML = '';
 
-    for(let key in blogsObj) {
-        post = blogsObj[key];
+    for(let key in blogsDB) {
+        post = blogsDB[key];
         blogPostEl = createBlogPost(post.title, post.date, post.summary, edit);
-        if(edit){
+        if(edit) {
             setUpEdit(blogPostEl);
             setUpDelete(blogPostEl);
         }
@@ -111,8 +104,12 @@ const updateBlogHolderDB = async (edit=true) => {
         blogsArrLength++;
     }
 
+    updateEmptyMessage(blogsArrLength);
+};
+
+const updateEmptyMessage = (blogsLength) => {
     let emptyMessage = document.getElementById('empty-message');
-    if(blogsArrLength == 0) {
+    if(blogsLength == 0) {
         emptyMessage.classList.remove('hide');
     }
     else{
