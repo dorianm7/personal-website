@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "html-minifier": "^4.0.0"
+  },
+  "scripts": {
+    "minify": "./node_modules/.bin/html-minifier --collapse-whitespace --minify-css true --minify-js true --remove-comments --remove-empty-attributes --input-dir ./public --output-dir ./public --file-ext html"
+  }
+}
