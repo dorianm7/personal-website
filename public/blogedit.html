@@ -13,9 +13,10 @@
     <script src="scripts/firebase-db.js" type="module"></script>
     <script src="scripts/blog-edit.js" type="module"></script>
     <script src="scripts/crud.js" type="module"></script>
+    <script src="scripts/date-script.js"></script>
     <link rel="stylesheet" type="text/css" href="./styles/style_min.css">
     <link rel="stylesheet" type="text/css" href="./styles/stylecrud.css">
-    <title>Document</title>
+    <title>Dorian Maldonado | Edit Blogs</title>
 </head>
 <body style="display: none;">
     <header>
@@ -27,6 +28,7 @@
                 <li class="menu-item"><a href="index.html#bio">Bio</a></li>
                 <li class="menu-item dropdown"><a href="index.html#projects">Projects</a>
                     <ul class="menu">
+                        <li class="menu-item"><a href="projects.html#music-social">Music Social</a></li>
                         <li class="menu-item"><a href="projects.html#rum8">Rum8</a></li>
                         <li class="menu-item"><a href="projects.html#clubhouse-dungeons">Clubhouse Dungeons</a></li>
                     </ul>
@@ -58,7 +60,7 @@
     </main>
     <footer>
         <hr>
-        <p>Copyright 2020</p>
+        <p>Copyright <span id="copyright-year"></span></p>
     </footer>
 </body>
 </html>

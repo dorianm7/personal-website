@@ -14,19 +14,19 @@ var uiConfig = {
     },
     //Will use popup for IDP Providers sign-in flow instead of the default, redirect.
     signInFlow: 'popup',
-    signInSuccessUrl: '../blogedit.html',
+    signInSuccessUrl: '/blogedit.html',
     signInOptions: [
         firebase.auth.EmailAuthProvider.PROVIDER_ID
     ],
-    tosUrl: '../index.html', //no TOS url
-    privacyPolicyUrl: '../index.html' //no Privacy policy url
+    tosUrl: '/index.html', //no TOS url
+    privacyPolicyUrl: '/index.html' //no Privacy policy url
 };
 
 //Move user from Login to Blog-Edit page if signed in and vice-versa 
 auth.onAuthStateChanged(function(user) {
     if(window.location.href.includes('login.html')) {
         if(user) {
-            window.location.href = '../blogedit.html';
+            window.location.href = '/blogedit.html';
         }
         else {
             let ui = new firebaseui.auth.AuthUI(auth);
@@ -37,7 +37,7 @@ auth.onAuthStateChanged(function(user) {
     if(window.location.href.includes('blogedit.html')) {
         if(!user) {
             alert('Access denied');
-            window.location.href = '../login.html';
+            window.location.href = '/login.html';
         }
         else{
             //body of 'blogedit.html' is hidden by default. Unhide if authorized

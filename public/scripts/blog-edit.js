@@ -9,7 +9,7 @@ const attachSignOutBtn = () => {
     const signOutBtn = document.getElementById('sign-out');
     signOutBtn.addEventListener('click', () => {
         auth.signOut()
-            .then(window.location.href = '../login.html')
+            .then(window.location.href = '/login.html')
             .catch((e) => console.log(e));
     });
 };
